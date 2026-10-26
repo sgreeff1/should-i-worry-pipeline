@@ -4,7 +4,7 @@ function drawStreet(ctx,t,p,cam){
   layer(ctx,cam,0.45,()=>{
     const g=ctx.createLinearGradient(0,0,0,FL); g.addColorStop(0,'#1A2440'); g.addColorStop(0.6,'#2B3B62'); g.addColorStop(1,'#3A4A72'); ctx.fillStyle=g; ctx.fillRect(-200,-200,W+400,FL+200);
     for(const [a,b,c] of STARS.slice(0,40)){ dot(ctx,a*W,b*H*0.35,1.2+c*1.5,`rgba(237,230,214,${0.25+0.3*c})`); }
-    dot(ctx,W*0.82,H*0.12,36,P.ivory); dot(ctx,W*0.82+14,H*0.12-8,30,'#1A2440');   // moon
+    dot(ctx,W*0.82,H*0.18,36,P.ivory); dot(ctx,W*0.82+14,H*0.18-8,30,'#1A2440');   // moon
     // building fronts
     const bs=[[0.00,0.30,0.22],[0.22,0.22,0.16],[0.38,0.36,0.26],[0.64,0.28,0.18],[0.82,0.40,0.20]];
     bs.forEach(([x,h,w],i)=>{ const bx=W*x, bh=H*h, bw=W*w; ctx.fillStyle=i%2?'#223250':'#1B2A46'; ctx.fillRect(bx,FL-80-bh,bw,bh+80);

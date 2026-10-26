@@ -19,22 +19,22 @@ add({kind:'CHAR',anim:'seq',env:'home',seq:[[0,'lookDown'],[1.0,'think',0.7],[2.
 add({kind:'CHAR',anim:'seq',env:'clinic',outfit:'doctor',seq:[[0,'stand'],[0.8,'point',0.6],[3,'handsOnHips',0.6]],face:[[0,'calm'],[0.8,'talking']],cut:true},5);
 add({kind:'CHAR',anim:'seq',env:'hospital',outfit:'older',seq:[[0,'stand'],[1.2,'backPain',0.8],[3.4,'stand',0.8]],face:[[0,'calm'],[1.2,'ouch'],[3.4,'relief']],cut:true},5);
 add({kind:'CHAR',anim:'seq',env:'street',outfit:'woman',seq:[[0,'walk']],face:[[0,'calm'],[2.5,'thinking']],cut:true},4.5);
-add({kind:'CHAR',anim:'seq',env:'workplace',outfit:'lead',seq:[[0,'sit'],[2.0,'sit',0.1]],face:[[0,'tired'],[2.0,'worried']],opts:{standX:W*0.36},cut:true},4);
+add({kind:'CHAR',anim:'seq',env:'workplace',outfit:'lead',seq:[[0,'sit'],[2.0,'sit',0.1]],face:[[0,'tired'],[2.0,'worried']],opts:{standX:W*0.40},cut:true},4);
 add({kind:'CHAR',anim:'seq',env:'bedroom',outfit:'child',seq:[[0,'lie']],face:[[0,'tired'],[2,'worried']],opts:{standX:BED.x+BED.w*0.62},cut:true},4);
-add({kind:'FIGURE',count:5,gap:330,pose:'stand',faces:['calm','happy','worried','surprise','talking'],outfits:['lead','woman','older','child','doctor'],overlays:[{region:'legs',color:'#EB5757',t0:1.0,fig:2,pulse:true}],icons:[{icon:'knee',at:'side',t0:1.6,fig:2,size:120,color:'#EB5757',dx:-120}]},5);
+add({kind:'FIGURE',count:5,gap:330,pose:'stand',faces:['calm','happy','worried','surprise','talking'],outfits:['lead','woman','older','child','doctor'],overlays:[{region:'legs',color:'#EB5757',t0:1.0,fig:2,pulse:true}],icons:[{icon:'knee',fig:2,t0:1.6,size:150,color:'#EB5757',dx:0,dy:-300}]},5);
 add({kind:'COUNT',n:100,cols:20,highlight:[37,38],highlightAt:1.0},4);
 add({kind:'COUNT',n:1000,cols:50,mode:'dots',highlight:[412,413,414],highlightAt:1.2},4);
-add({kind:'CHART',type:'bar',labels:['20s','30s','40s','50s','60s','70s','80s'],values:[30,40,50,60,69,77,84],format:'{}%',title:'Pain-free people with a disc bulge, by age'},5);
+add({kind:'CHART',type:'bar',labels:['20s','30s','40s','50s','60s','70s','80s'],values:[30,40,50,60,69,77,84],format:'{}%',title:'Pain-free people with a disc bulge, by age',cite:'Brinjikji et al., AJNR, 2015'},5);
 add({kind:'ICONS',layout:'row',items:[{icon:'bladder',label:'Bladder'},{icon:'brain',label:'Brain'},{icon:'heart',label:'Heart'},{icon:'knee',label:'Knee'}]},4.5);
 add({kind:'ICONS',layout:'row',items:[{icon:'vertebra',label:'Vertebra'},{icon:'disc',label:'Disc'},{icon:'nerve',label:'Nerve'},{icon:'bone',label:'Bone'}]},4.5);
 add({kind:'ICONS',layout:'single',size:300,items:[{icon:'toast',flip:1.5,flipTo:'flame'}]},4);
 add({kind:'BANNER',tier:'GO NOW',sub:'emergency department',items:[{icon:'bladder',label:'Bladder',color:'#EB5757'},{icon:'legs',label:'Weak legs'},{icon:'thermometer',label:'Fever',color:'#EB5757'}]},4.5);
 add({kind:'BANNER',tier:'SAME DAY',items:[{icon:'thermometer',label:'Fever'},{icon:'document',label:'Past cancer'}]},3.5);
-add({kind:'ANATOMY',asset:'spine',pointer:{at:[280,931],label:'Disc',t0:0.8}},4);
+add({kind:'ANATOMY',asset:'spine',pointer:{at:[280,931],label:'Disc',t0:0.8}},4);   // the Servier credit is drawn by the template
 add({kind:'GLOBE'},3.5);
 add({kind:'END',lines:['General education, not medical advice','Reviewed by Dr Greeff, neurosurgery registrar'],cta:'Subscribe for the next one',meterValue:0.45,cut:true},4);
 const T_BANNER=shots.find(s=>s.kind==='BANNER').t0;
-const REEL={title:'Library reel v2',library:'v2.0-dev',tag:'PIPELINE — library reel v2 · cast, organs, environments, templates, worry meter',shots,cards:[['Cards sit in the safe band on character shots',shots[2].t0+0.5,shots[2].t1-0.3]],cites:[],meter:[{t0:T_BANNER+0.3,t1:T_BANNER+1.6,from:0.1,to:0.92,hold:0},{t0:T_BANNER+4.5,t1:T_BANNER+5.6,from:0.92,to:0.45,hold:2.0}],duration:t};
+const REEL={title:'Library reel v2',library:'v2.0-dev',tag:'PIPELINE — library reel v2 · cast, organs, environments, templates, worry meter',shots,cards:[['Cards in the safe band',shots[2].t0+0.5,shots[2].t1-0.3]],cites:[],meter:[{t0:T_BANNER+0.3,t1:T_BANNER+1.6,from:0.1,to:0.92,hold:2.9},{t0:T_BANNER+4.5,t1:T_BANNER+5.6,from:0.92,to:0.45,hold:2.0}],duration:t};
 window.REEL_DURATION=t;
 window.ready=(async()=>{ EP=REEL; await Promise.all([loadImg('spine','assets/A_Espace_epidural.png'),loadImg('body','assets/A_Colonne_normale2.png'),loadImg('vert','assets/A_vertebre_06.png'),loadImg('mask_disc','assets/mask_disc.png'),document.fonts.load('800 64px Inter'),document.fonts.load('500 26px Inter')]); return true; })();
 window.draw=function(t){ drawEpisode(X,t,CX,CC,OC2); };

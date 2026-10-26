@@ -6,7 +6,7 @@ function glowOn(ctx,c,b){ ctx.shadowColor=c; ctx.shadowBlur=b; } function glowOf
 // Convention: `c` is the STATE colour — omitted/organ = normal; P.red = red-flag (halo, worried face, full). The body is always P.organ.
 const organAlert=(c)=> !!c && c!==P.organ && c!==P.teal;
 function organHalo(ctx,t,c){ if(!organAlert(c)) return; ctx.save(); ctx.globalCompositeOperation='lighter';
-  const a=0.55+0.25*Math.sin(t*5); const g=ctx.createRadialGradient(0,0,10,0,0,78); g.addColorStop(0,`rgba(235,87,87,${0.55*a})`); g.addColorStop(0.6,`rgba(235,87,87,${0.22*a})`); g.addColorStop(1,'rgba(0,0,0,0)');
+  const a=0.55+0.25*Math.sin(t*5); const g=ctx.createRadialGradient(0,0,10,0,0,84); g.addColorStop(0,`rgba(235,87,87,${0.75*a})`); g.addColorStop(0.6,`rgba(235,87,87,${0.32*a})`); g.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,78,0,7); ctx.fill(); ctx.restore(); }
 function organShade(ctx,pathFn,tint='rgba(90,30,40,0.20)'){ if(!window.STYLE.shade) return; ctx.save(); pathFn(ctx); ctx.clip();
   const g=ctx.createRadialGradient(-10,-14,6,0,0,46); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,tint); ctx.fillStyle=g; ctx.fillRect(-50,-50,100,100);
@@ -32,7 +32,7 @@ const ICON = {
     ctx.strokeStyle='#B5AB95'; ctx.lineWidth=3; for(let i=0;i<8;i++){ const a=i*Math.PI/4; ctx.beginPath(); ctx.moveTo(Math.cos(a)*16,Math.sin(a)*16); ctx.lineTo(Math.cos(a)*26,Math.sin(a)*26); ctx.stroke(); }
     const on=Math.sin(t*6)>0; glowOn(ctx,c,on?24:0); ctx.fillStyle=on?c:'#8C5A5A'; ctx.beginPath(); ctx.arc(0,0,7,0,7); ctx.fill(); glowOff(ctx);
     ctx.strokeStyle=c; ctx.lineWidth=4; ctx.globalAlpha=0.7; for(let i=1;i<=2;i++){ const r=50+i*10+((t*40)%10); ctx.beginPath(); ctx.arc(0,0,r,-0.6,0.6); ctx.stroke(); ctx.beginPath(); ctx.arc(0,0,r,Math.PI-0.6,Math.PI+0.6); ctx.stroke(); } ctx.globalAlpha=1; },
-  bladder:(ctx,t,c)=>{ organHalo(ctx,t,c); ctx.fillStyle=P.organ; bladderBody(ctx); ctx.fill(); organShade(ctx,bladderBody); organFluid(ctx,bladderBody,organAlert(c)?0.86:0.45,t); organFace(ctx,t,organAlert(c)?'worried':'calm'); organOutline(ctx,bladderBody); },   // no ureters: beside a face, side tubes read as arms (QA v2); the pear-with-neck silhouette + fluid line carries 'bladder'
+  bladder:(ctx,t,c)=>{ organHalo(ctx,t,c); ctx.fillStyle=P.organ; bladderBody(ctx); ctx.fill(); organShade(ctx,bladderBody); organFluid(ctx,bladderBody,organAlert(c)?0.86:0.30,t); organFace(ctx,t,organAlert(c)?'worried':'calm'); organOutline(ctx,bladderBody); },   // no ureters: beside a face, side tubes read as arms (QA v2); the pear-with-neck silhouette + fluid line carries 'bladder'
   bowel:(ctx,t,c=P.teal)=>{ ctx.strokeStyle=c; ctx.lineWidth=16; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(-34,30); ctx.lineTo(-34,-20); ctx.quadraticCurveTo(-34,-40,-14,-40); ctx.lineTo(14,-40); ctx.quadraticCurveTo(34,-40,34,-20); ctx.lineTo(34,30); ctx.stroke(); },
   legs:(ctx,t,c=P.teal)=>{ ctx.strokeStyle=c; ctx.lineWidth=20; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(-16,-44); ctx.lineTo(-22,40); ctx.moveTo(16,-44); ctx.lineTo(22,40); ctx.stroke(); ctx.fillStyle=P.ivory; rr(ctx,-40,36,30,14,6); ctx.fill(); rr(ctx,10,36,30,14,6); ctx.fill(); },
   scanner:(ctx,t,c=P.ivory)=>{ ctx.fillStyle=c; ctx.beginPath(); ctx.arc(0,0,46,0,7); ctx.fill(); ctx.fillStyle=P.navyD; ctx.beginPath(); ctx.arc(0,0,26,0,7); ctx.fill(); ctx.fillStyle='#9AA8C2'; rr(ctx,-60,24,120,16,6); ctx.fill(); },
@@ -61,31 +61,33 @@ function drawIcon(ctx,name,x,y,size,t,color,alpha=1){ const f=ICON[name]; if(!f)
 // ---- the first organ set (Decision #47): spine (vertebra, disc, nerve), brain, heart, knee, bone. Bones ivory, nerves yellow, organs rose; all with faces.
 const BONE_SHADE='rgba(80,60,30,0.22)', NERVE_SHADE='rgba(120,80,0,0.22)';
 function vertebraBody(ctx){ ctx.beginPath(); ctx.moveTo(-40,-14); ctx.quadraticCurveTo(-42,-46,0,-44); ctx.quadraticCurveTo(42,-46,40,-14); ctx.quadraticCurveTo(38,4,0,2); ctx.quadraticCurveTo(-38,4,-40,-14); ctx.closePath(); }   // the body (bean), seen from above
-function vertebraArch(ctx){ ctx.beginPath(); ctx.moveTo(-20,-4); ctx.quadraticCurveTo(-34,0,-34,14); ctx.lineTo(-54,22); ctx.lineTo(-50,32); ctx.lineTo(-28,28); ctx.quadraticCurveTo(-22,40,-8,40); ctx.lineTo(-6,58); ctx.lineTo(6,58); ctx.lineTo(8,40); ctx.quadraticCurveTo(22,40,28,28); ctx.lineTo(50,32); ctx.lineTo(54,22); ctx.lineTo(34,14); ctx.quadraticCurveTo(34,0,20,-4); ctx.closePath(); }   // arch with transverse processes and the spinous process
-function vertebraHole(ctx){ ctx.beginPath(); ctx.ellipse(0,14,14,11,0,0,7); ctx.closePath(); }   // the canal the cord runs through
-function discBody(ctx){ ctx.beginPath(); ctx.ellipse(0,4,46,24,0,0,7); ctx.closePath(); }
+function vertebraArch(ctx){ ctx.beginPath(); ctx.moveTo(-22,-4); ctx.quadraticCurveTo(-36,2,-34,16); ctx.quadraticCurveTo(-48,18,-46,28); ctx.quadraticCurveTo(-40,34,-28,30); ctx.quadraticCurveTo(-22,42,-8,42); ctx.quadraticCurveTo(-8,52,0,54); ctx.quadraticCurveTo(8,52,8,42); ctx.quadraticCurveTo(22,42,28,30); ctx.quadraticCurveTo(40,34,46,28); ctx.quadraticCurveTo(48,18,34,16); ctx.quadraticCurveTo(36,2,22,-4); ctx.closePath(); }   // rounded nubs, not wings   // arch with transverse processes and the spinous process
+function vertebraHole(ctx){ ctx.beginPath(); ctx.ellipse(0,18,11,8,0,0,7); ctx.closePath(); }   // the canal the cord runs through
+function discBody(ctx){ ctx.beginPath(); ctx.ellipse(0,-6,46,18,0,0,7); ctx.closePath(); }
 function brainBody(ctx){ ctx.beginPath(); ctx.moveTo(-6,34); ctx.quadraticCurveTo(-44,34,-44,2); ctx.quadraticCurveTo(-46,-30,-14,-36); ctx.quadraticCurveTo(0,-42,14,-36); ctx.quadraticCurveTo(46,-30,44,2); ctx.quadraticCurveTo(44,30,16,34); ctx.quadraticCurveTo(10,42,0,36); ctx.quadraticCurveTo(-4,40,-6,34); ctx.closePath(); }
 function heartBody(ctx){ ctx.beginPath(); ctx.moveTo(-8,-26); ctx.quadraticCurveTo(-44,-30,-42,4); ctx.quadraticCurveTo(-40,30,0,48); ctx.quadraticCurveTo(40,30,42,0); ctx.quadraticCurveTo(44,-26,12,-24); ctx.quadraticCurveTo(4,-20,-8,-26); ctx.closePath(); }   // an anatomical heart, apex down-right
 function boneBody(ctx){ ctx.beginPath(); ctx.moveTo(-14,-30); ctx.lineTo(14,-30); ctx.quadraticCurveTo(32,-50,34,-36); ctx.quadraticCurveTo(44,-28,28,-20); ctx.lineTo(12,30); ctx.quadraticCurveTo(34,36,30,50); ctx.quadraticCurveTo(18,60,8,46); ctx.lineTo(-8,46); ctx.quadraticCurveTo(-18,60,-30,50); ctx.quadraticCurveTo(-34,36,-12,30); ctx.lineTo(-28,-20); ctx.quadraticCurveTo(-44,-28,-34,-36); ctx.quadraticCurveTo(-32,-50,-14,-30); ctx.closePath(); }
 function kneeFemur(ctx){ ctx.beginPath(); ctx.moveTo(-12,-56); ctx.lineTo(12,-56); ctx.lineTo(14,-22); ctx.quadraticCurveTo(40,-20,36,2); ctx.quadraticCurveTo(20,10,0,4); ctx.quadraticCurveTo(-20,10,-36,2); ctx.quadraticCurveTo(-40,-20,-14,-22); ctx.closePath(); }
 function kneeTibia(ctx){ ctx.beginPath(); ctx.moveTo(-34,16); ctx.quadraticCurveTo(0,8,34,16); ctx.quadraticCurveTo(26,30,12,32); ctx.lineTo(10,58); ctx.lineTo(-10,58); ctx.lineTo(-12,32); ctx.quadraticCurveTo(-26,30,-34,16); ctx.closePath(); }
 function kneePatella(ctx){ ctx.beginPath(); ctx.ellipse(0,-6,16,19,0,0,7); ctx.closePath(); }
-function nerveBody(ctx){ ctx.beginPath(); ctx.moveTo(-11,-54); ctx.lineTo(11,-54); ctx.lineTo(11,54); ctx.lineTo(-11,54); ctx.closePath(); }
-function nerveRoots(ctx,c){ ctx.strokeStyle=c; ctx.lineWidth=8; ctx.lineCap='round'; ctx.beginPath(); for(const y of [-30,-2,26]){ ctx.moveTo(-9,y); ctx.quadraticCurveTo(-26,y+4,-38,y+22); ctx.moveTo(9,y); ctx.quadraticCurveTo(26,y+4,38,y+22); } ctx.stroke(); }
+function nerveBody(ctx){ ctx.beginPath(); ctx.moveTo(-12,-50); ctx.quadraticCurveTo(-12,-60,0,-60); ctx.quadraticCurveTo(12,-60,12,-50); ctx.lineTo(10,14); ctx.lineTo(-10,14); ctx.closePath(); }
+function nerveRoots(ctx,c){ ctx.strokeStyle=c; ctx.lineWidth=9; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(0,10); ctx.quadraticCurveTo(-10,30,-30,44); ctx.moveTo(-30,44); ctx.lineTo(-44,50); ctx.moveTo(-30,44); ctx.lineTo(-34,58); ctx.moveTo(0,10); ctx.quadraticCurveTo(10,30,30,44); ctx.moveTo(30,44); ctx.lineTo(44,50); ctx.moveTo(30,44); ctx.lineTo(34,58); ctx.stroke(); }   // the cord branches once, then twice: a nerve, not ribs
 function smallFace(ctx,t,mood,sc=0.7,dy=0){ ctx.save(); ctx.translate(0,dy); ctx.scale(sc,sc); organFace(ctx,t,mood); ctx.restore(); }
 Object.assign(ICON,{
   vertebra:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
     ctx.fillStyle=P.ivoryD; vertebraArch(ctx); ctx.fill(); organOutline(ctx,vertebraArch); ctx.fillStyle=P.navyD; vertebraHole(ctx); ctx.fill();
-    ctx.fillStyle=P.ivory; vertebraBody(ctx); ctx.fill(); organShade(ctx,vertebraBody,BONE_SHADE); smallFace(ctx,t,m,0.7,-12); organOutline(ctx,vertebraBody); },
+    ctx.fillStyle=P.ivory; vertebraBody(ctx); ctx.fill(); organShade(ctx,vertebraBody,BONE_SHADE); smallFace(ctx,t,m,0.78,-16); organOutline(ctx,vertebraBody); },
   disc:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
-    ctx.fillStyle=P.disc; discBody(ctx); ctx.fill(); ctx.fillStyle=P.ivory; ctx.beginPath(); ctx.ellipse(0,4,22,11,0,0,7); ctx.fill();   // tough ring, soft centre (colour code)
-    organShade(ctx,discBody,'rgba(40,60,90,0.25)'); smallFace(ctx,t,m,0.6,4); organOutline(ctx,discBody); },
+    const wall=(ctx)=>{ ctx.beginPath(); ctx.moveTo(-46,-6); ctx.lineTo(-46,16); ctx.ellipse(0,16,46,18,0,Math.PI,0,true); ctx.lineTo(46,-6); ctx.closePath(); };
+    ctx.fillStyle='#6F8AA6'; wall(ctx); ctx.fill(); organOutline(ctx,wall);
+    ctx.fillStyle=P.disc; discBody(ctx); ctx.fill(); ctx.fillStyle=P.ivory; ctx.beginPath(); ctx.ellipse(0,-6,15,6,0,0,7); ctx.fill();   // tough ring, soft centre (colour code)
+    organShade(ctx,discBody,'rgba(40,60,90,0.22)'); organOutline(ctx,discBody); smallFace(ctx,t,m,0.5,14); },
   nerve:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
-    if(window.STYLE.outline){ ctx.save(); nerveRoots(ctx,OUT); ctx.lineWidth=8+OUTW*0.9; ctx.stroke(); ctx.restore(); } nerveRoots(ctx,P.yellow);
-    ctx.fillStyle=P.yellow; nerveBody(ctx); ctx.fill(); organShade(ctx,nerveBody,NERVE_SHADE); smallFace(ctx,t,m,0.6,-16); organOutline(ctx,nerveBody); },
+    if(window.STYLE.outline){ ctx.save(); ctx.lineWidth=9+OUTW*0.9; ctx.strokeStyle=OUT; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(0,10); ctx.quadraticCurveTo(-10,30,-30,44); ctx.moveTo(-30,44); ctx.lineTo(-44,50); ctx.moveTo(-30,44); ctx.lineTo(-34,58); ctx.moveTo(0,10); ctx.quadraticCurveTo(10,30,30,44); ctx.moveTo(30,44); ctx.lineTo(44,50); ctx.moveTo(30,44); ctx.lineTo(34,58); ctx.stroke(); ctx.restore(); } nerveRoots(ctx,P.yellow);
+    ctx.fillStyle=P.yellow; nerveBody(ctx); ctx.fill(); organShade(ctx,nerveBody,NERVE_SHADE); smallFace(ctx,t,m,0.62,-30); organOutline(ctx,nerveBody); },
   brain:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
     ctx.fillStyle=P.organ; brainBody(ctx); ctx.fill(); organShade(ctx,brainBody);
-    ctx.save(); brainBody(ctx); ctx.clip(); ctx.strokeStyle=P.organD; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.beginPath();   // gyri
+    ctx.save(); brainBody(ctx); ctx.clip(); ctx.strokeStyle=P.organD; ctx.lineWidth=5; ctx.lineCap='round'; ctx.beginPath();   // gyri
     ctx.moveTo(-30,-10); ctx.quadraticCurveTo(-22,-26,-10,-14); ctx.moveTo(-34,14); ctx.quadraticCurveTo(-24,6,-20,22); ctx.moveTo(10,-30); ctx.quadraticCurveTo(22,-22,30,-30); ctx.moveTo(22,8); ctx.quadraticCurveTo(32,16,26,26); ctx.moveTo(0,-36); ctx.lineTo(0,36); ctx.stroke(); ctx.restore();
     smallFace(ctx,t,m,0.75,6); organOutline(ctx,brainBody); },
   heart:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm'; const beat=1+0.03*Math.max(0,Math.sin(t*7.5))**8;

@@ -11,6 +11,10 @@ function sprite(ctx,x,y,s,color,o={}){ // small figure for COUNT
   if(o.spine){ ctx.strokeStyle=o.spine; ctx.lineWidth=8; ctx.lineCap='round'; glowOn(ctx,o.spine,22); ctx.beginPath(); ctx.moveTo(0,-20); ctx.lineTo(0,28); ctx.stroke(); glowOff(ctx); for(let i=0;i<5;i++){ dot(ctx,0,-16+i*11,5,P.ivory); } }
   ctx.restore();
 }
+function featherEdges(ctx,x,y,w,h,m){ // soften a cropped image's four edges into the stage colour
+  const c0='rgba(18,26,46,0)', c1='rgba(18,26,46,0.97)';
+  for(const [gx0,gy0,gx1,gy1,rx,ry,rw,rh] of [[x,0,x+m,0,x,y,m,h],[x+w,0,x+w-m,0,x+w-m,y,m,h],[0,y,0,y+m,x,y,w,m],[0,y+h,0,y+h-m,x,y+h-m,w,m]]){
+    const g=ctx.createLinearGradient(gx0,gy0,gx1,gy1); g.addColorStop(0,c1); g.addColorStop(1,c0); ctx.fillStyle=g; ctx.fillRect(rx,ry,rw,rh); } }
 const TEMPLATES = {
   // 1. CHAR — the rig acting in an environment, with its own shot-list camera
   CHAR:(ctx,t,spec,S)=>{
@@ -20,7 +24,7 @@ const TEMPLATES = {
   },
   // 2. FIGURE — the character as a diagram subject in the void: region tints and attached icons
   FIGURE:(ctx,t,spec,S)=>{
-    const n=spec.count||1, gap=spec.gap||520; const zb=spec.zoom||(n===1?1.42:n===2?1.18:1.0); const cam=pushCam(t,S.dur,zb,zb+MOTION.pushIn,W/2,H*(spec.focusY||0.56)); S.cam=cam;   // focusY > 0.56 lifts the figure clear of the card
+    const n=spec.count||1, gap=spec.gap||520; const zb=spec.zoom||(n===1?1.15:n===2?1.05:1.0); const cam=pushCam(t,S.dur,zb,zb+MOTION.pushIn,W/2,H*(spec.focusY||0.60)); S.cam=cam;   // framed so the top card band (11 % height) stays clear of heads and raised hands
     const anims=S.figs; const ps=anims.map(A=>pose(A,t));
     drawVoid(ctx,t,ps[0],cam,{shadow:false});
     layer(ctx,cam,1.0,()=>{ for(const p of ps) drawShadow(ctx,p); });
@@ -61,7 +65,8 @@ const TEMPLATES = {
       if(spec.type==='bar'){ spec.values.forEach((v,i)=>{ const x=x0+w*(i+0.5)/spec.values.length, bh=h*v/vmax*clamp(k*spec.values.length-i); ctx.fillStyle=spec.color||P.teal; rr(ctx,x-w/spec.values.length*0.3,y0-bh,w/spec.values.length*0.6,bh,8); ctx.fill(); if(bh>0){ ctx.fillStyle=P.ivory; ctx.font='700 30px Inter'; ctx.fillText(spec.format?spec.format.replace('{}',v):v,x,y0-bh-14); } }); }
       else { ctx.strokeStyle=spec.color||P.teal; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.beginPath(); const N=Math.max(2,Math.ceil(spec.values.length*k)); spec.values.slice(0,N).forEach((v,i)=>{ const x=x0+w*(i+0.5)/spec.values.length, y=y0-h*v/vmax; i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
         spec.values.forEach((v,i)=>{ if(i>=N) return; const x=x0+w*(i+0.5)/spec.values.length, y=y0-h*v/vmax; dot(ctx,x,y,12,P.ivory); if(i===0||i===spec.values.length-1){ ctx.fillStyle=P.ivory; ctx.font='700 32px Inter'; ctx.fillText(v,x,y-26); } }); }
-      if(spec.title){ ctx.font='600 34px Inter'; ctx.fillStyle=P.ivory; ctx.textAlign='left'; ctx.fillText(spec.title,x0,y0-h-30); } }); },
+      if(spec.title){ ctx.font='600 34px Inter'; ctx.fillStyle=P.ivory; ctx.textAlign='left'; ctx.fillText(spec.title,x0,y0-h-30); } });
+    if(spec.cite) cite(ctx,spec.cite,0.3,t,S.dur); },   // a chart carries its own citation (gate 4.4)
   // 5. ICONS — 1–4 icons with labels; layouts: row | split | single; animations: pop | flip | pulse; optional checklist / cross-out
   ICONS:(ctx,t,spec,S)=>{ const cam=pushCam(t,S.dur); S.cam=cam; drawVoid(ctx,t,null,cam,{floor:false});
     layer(ctx,cam,1.0,()=>{ const items=spec.items, n=items.length; const size=spec.size||(n===1?300:n===2?240:180); const gap=spec.gap||(size*1.9);
@@ -87,7 +92,7 @@ const TEMPLATES = {
       if(t>1.2){ const q=EASE.io(clamp((t-1.2)/0.5)), px=x+spec.pointer[0]/img.width*ww, py=y+spec.pointer[1]/img.height*hh, ex=W*0.66, ey=H*0.36; ctx.strokeStyle=P.ivory; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(lerp(px,ex,q),lerp(py,ey,q)); ctx.stroke(); dot(ctx,px,py,9,P.ivory);
         if(q>=1){ const r=EASE.ob(clamp((t-1.8)/0.5)); ctx.save(); ctx.translate(W*0.72,H*0.56); ctx.scale(r,r); glowOn(ctx,'rgba(143,169,196,0.5)',40); dot(ctx,0,0,190,P.disc); glowOff(ctx); dot(ctx,0,0,100,P.ivory); ctx.strokeStyle=OUT; ctx.lineWidth=4; ctx.beginPath(); ctx.arc(0,0,190,0,7); ctx.stroke(); ctx.beginPath(); ctx.arc(0,0,100,0,7); ctx.stroke(); ctx.restore();
         ctx.globalAlpha=clamp(r); ctx.font='700 40px Inter'; ctx.textAlign='center'; ctx.fillStyle=P.disc; ctx.fillText('tough ring',W*0.72,H*0.56-215); ctx.font='700 30px Inter'; /* smaller than 'tough ring' so it sits inside the 100 px centre (Sebastian, 26 Oct 2026) */ ctx.fillStyle=P.navyD; ctx.fillText('soft center',W*0.72,H*0.56+11); ctx.font='800 54px Inter'; ctx.fillStyle=P.disc; ctx.fillText(spec.label,W*0.72,H*0.56-300); ctx.globalAlpha=1; } } ctx.restore(); }
-    else { const p=EASE.io(clamp(t/0.7)); const h=H*(spec.h||0.84), s=h/img.height, w=img.width*s, x=W*(spec.x||0.5)-w/2, y=H*(spec.y||0.08); ctx.globalAlpha=p; glowOn(ctx,'rgba(43,179,163,0.35)',40); ctx.drawImage(img,x,y,w,h); glowOff(ctx); ctx.globalAlpha=1;
+    else { const p=EASE.io(clamp(t/0.7)); const h=H*(spec.h||0.84), s=h/img.height, w=img.width*s, x=W*(spec.x||0.5)-w/2, y=H*(spec.y||0.08); ctx.globalAlpha=p; ctx.drawImage(img,x,y,w,h); featherEdges(ctx,x,y,w,h,spec.feather??70); ctx.globalAlpha=1; if(spec.credit!==false) cite(ctx,'Anatomy: Servier Medical Art, CC BY 4.0',0.2,t,S.dur);
       if(spec.pointer && t>spec.pointer.t0){ const q=EASE.io(clamp((t-spec.pointer.t0)/0.5)), px=x+spec.pointer.at[0]/img.width*w, py=y+spec.pointer.at[1]/img.height*h, ex=W*0.68, ey=H*0.36; ctx.strokeStyle=P.ivory; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(lerp(px,ex,q),lerp(py,ey,q)); ctx.stroke(); dot(ctx,px,py,9,P.ivory); if(q>=1){ ctx.font='800 54px Inter'; ctx.textAlign='left'; ctx.fillStyle=P.disc; ctx.fillText(spec.pointer.label,ex+18,ey+18); } } } },
   // 7. BANNER — urgency tier strip + icons beneath (icon and word, never colour alone)
   BANNER:(ctx,t,spec,S)=>{ const cam=pushCam(t,S.dur,1,1.02); S.cam=cam; drawVoid(ctx,t,null,cam,{floor:false,tint:P.navy});

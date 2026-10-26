@@ -10,7 +10,7 @@ window.drawPose=function(name,t,opts){
   const A=staticPose(name,opts||{}); const p=pose(A,t);
   X.setTransform(1,0,0,1,0,0); X.fillStyle=P.navy; X.fillRect(0,0,W,H);
   X.strokeStyle='rgba(237,230,214,0.25)'; X.lineWidth=3; X.beginPath(); X.moveTo(0,A.floor); X.lineTo(W,A.floor); X.stroke();
-  if(name==='sit'){ X.fillStyle='#2A4A6A'; rr(X,A.standX-60,A.floor-118,230,26,8); X.fill(); rr(X,A.standX-70,A.floor-300,34,300,8); X.fill(); rr(X,A.standX-40,A.floor-96,20,96,4); X.fill(); rr(X,A.standX+150,A.floor-96,20,96,4); X.fill(); }
+  if(name==='sit'){ X.fillStyle='#6E7F96'; rr(X,A.standX-60,A.floor-118,230,26,8); X.fill(); rr(X,A.standX-70,A.floor-300,34,300,8); X.fill(); rr(X,A.standX-40,A.floor-96,20,96,4); X.fill(); rr(X,A.standX+150,A.floor-96,20,96,4); X.fill(); }
   if(name==='lie'){ X.fillStyle='#2A4A6A'; rr(X,A.standX-200,A.floor-70,620,70,14); X.fill(); }
   drawCharacter(X,t,p);
   X.font='700 40px Inter'; X.fillStyle=P.ivory; X.textAlign='left'; X.fillText(name,60,90);

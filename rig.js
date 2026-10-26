@@ -6,11 +6,11 @@ const CAST = {
   lead:   { top:P.teal,    topD:P.tealD,  pants:P.pants,   pantsD:P.pantsD, hair:null,    glasses:false, scale:1 },
   woman:  { top:'#8C7BD3', topD:'#7363B5', pants:'#3A4F7A', pantsD:'#2D3F63', hair:'bob',   glasses:false, scale:1 },
   older:  { top:'#9B4A5E', topD:'#7E3A4B', pants:'#4A4F5C', pantsD:'#3A3E49', hair:'short', glasses:true,  scale:1 },
-  child:  { top:'#6FB7E8', topD:'#5597C4', pants:'#3A4F7A', pantsD:'#2D3F63', hair:'tuft',  glasses:false, scale:0.74 },
+  child:  { top:'#6FB7E8', topD:'#5597C4', pants:'#3A4F7A', pantsD:'#2D3F63', hair:'cap',   glasses:false, scale:0.74 },
   doctor: { top:'#F2EBDD', topD:'#D9CFB8', pants:'#2B3B62', pantsD:'#22304F', hair:null,    glasses:true,  scale:1 },
 };
 CAST.alt = CAST.woman;   // crowd colour from v1 = the woman's outfit
-const HAIR = { bob:'#3B2A2E', short:P.ivoryD, tuft:'#B3472F' };
+const HAIR = { bob:'#3B2A2E', short:P.ivoryD, tuft:'#B3472F', cap:'#B3472F' };
 function pose(A,t){
   const K=A.K, FLOOR=A.floor, STAND_X=A.standX; const id=A.idle(t), tr=A.tremble(t);
   const hx = STAND_X - 6 + ch(K.hx,t) + tr*0.8;
@@ -42,7 +42,7 @@ function armTarget(state, p, side){
   const L=BODY.uarm+BODY.farm;
   const s = side==='near' ? [p.ax+p.px*8, p.ay+p.py*8] : [p.ax-p.px*8, p.ay-p.py*8];
   switch(state){
-    case 'hang':  return [s[0]-p.px*8, s[1]+L*0.95];
+    case 'hang':  return [s[0]+(side==='near'?p.px*16:-p.px*22), s[1]+L*0.95];   // near hand a little forward, far hand a little back
     case 'reach': return [p.A.sockX-6, p.A.floor-30];
     case 'back':  { const rub=(p.t>5.0&&p.t<10.6)? Math.sin(p.t*2*Math.PI*1.3)*9 : 0; return [p.lbx-8+p.ux*rub, p.lby+2+p.uy*rub]; }
     case 'knee':  return [p.kneeNear[0]+22, p.kneeNear[1]-14];
@@ -81,7 +81,7 @@ function armPose(keys, p, side, lag){
 function drawCharacter(ctx,t,p){
   const A=p.A;
   const OUTFIT = CAST[p.outfit] || CAST.lead;
-  ctx.save(); const CS=(CAST[p.outfit]||CAST.lead).scale; if(CS!==1){ const fx=(p.fN[0]+p.fF[0])/2, fy=p.A.floor; ctx.translate(fx,fy); ctx.scale(CS,CS); ctx.translate(-fx,-fy); }
+  ctx.save(); const CS=(CAST[p.outfit]||CAST.lead).scale; if(CS!==1){ const lying=!!p.rot; const fx=lying?p.hx:(p.fN[0]+p.fF[0])/2, fy=lying?p.hy:p.A.floor; ctx.translate(fx,fy); ctx.scale(CS,CS); ctx.translate(-fx,-fy); }
   if(p.rot){ ctx.translate(p.hx,p.hy); ctx.rotate(p.rot); ctx.translate(-p.hx,-p.hy); } const near=armPose(A.ARM_NEAR,p,'near',0.0), far=armPose(A.ARM_FAR,p,'far',0.06);
   const face=step(A.FACE,t);
   const bodyClip=()=>{ ctx.beginPath(); ctx.save(); localCtx(ctx,p); sweaterPath(ctx); pelvisPath(ctx); ctx.restore(); };
@@ -145,10 +145,13 @@ function drawCharacter(ctx,t,p){
   if((CAST[p.outfit]||CAST.lead).glasses) drawGlasses(ctx,p);
   ctx.restore();
 }
-function drawDoctorBits(ctx,p,near){ // coat lapels, stethoscope, glasses
+function drawDoctorBits(ctx,p,near){ // open coat front, lapels, a shirt showing, stethoscope with both ear tubes
   ctx.save(); localCtx(ctx,p);
-  ctx.fillStyle='#E3D8C0'; ctx.beginPath(); ctx.moveTo(-14,236); ctx.lineTo(18,236); ctx.lineTo(4,150); ctx.lineTo(-10,160); ctx.closePath(); ctx.fill();
-  ctx.strokeStyle='#2A3B5C'; ctx.lineWidth=6; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(-6,222); ctx.quadraticCurveTo(40,170,30,120); ctx.stroke(); dot(ctx,30,116,12,'#9AA8C2'); dot(ctx,30,116,6,'#2A3B5C');
+  ctx.fillStyle=P.teal; ctx.beginPath(); ctx.moveTo(-14,236); ctx.lineTo(18,236); ctx.lineTo(6,120); ctx.lineTo(-6,120); ctx.closePath(); ctx.fill();            // shirt in the opening
+  ctx.strokeStyle='#C9BFA8'; ctx.lineWidth=5; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(2,118); ctx.lineTo(2,40); ctx.stroke();                              // coat front edge below the opening
+  ctx.fillStyle='#E3D8C0'; ctx.beginPath(); ctx.moveTo(-26,234); ctx.lineTo(-4,236); ctx.lineTo(-8,170); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.moveTo(30,232); ctx.lineTo(10,236); ctx.lineTo(12,170); ctx.closePath(); ctx.fill();   // lapels
+  ctx.strokeStyle='#2A3B5C'; ctx.lineWidth=6; ctx.beginPath(); ctx.moveTo(-8,226); ctx.quadraticCurveTo(-30,190,-14,150); ctx.quadraticCurveTo(0,120,30,118); ctx.moveTo(16,228); ctx.quadraticCurveTo(34,190,30,150); ctx.quadraticCurveTo(28,126,30,118); ctx.stroke();   // both tubes
+  dot(ctx,30,116,12,'#9AA8C2'); dot(ctx,30,116,6,'#2A3B5C');
   ctx.restore();
 }
 function drawGlasses(ctx,p){ ctx.save(); ctx.translate(p.cx,p.cy); ctx.rotate(p.hdir); const R=BODY.headR; ctx.strokeStyle=OUT; ctx.lineWidth=4;
@@ -204,6 +207,10 @@ function drawHair(ctx,p,R){ // head-local coords: face toward +x, top at -y. Hai
     if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.6; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
   if(m.hair==='short'){ ctx.beginPath(); ctx.arc(0,0,R*1.05,Math.PI*0.98,Math.PI*1.80); ctx.arc(0,0,R*0.76,Math.PI*1.80,Math.PI*0.98,true); ctx.closePath();
     if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.6; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
+  if(m.hair==='cap'){ ctx.beginPath(); ctx.arc(0,0,R*1.06,Math.PI*0.95,Math.PI*1.86); ctx.arc(0,0,R*0.80,Math.PI*1.86,Math.PI*0.95,true); ctx.closePath();
+    if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.6; ctx.stroke(); } ctx.fillStyle=col; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(-R*0.10,-R*0.98); ctx.quadraticCurveTo(-R*0.05,-R*1.36,R*0.28,-R*1.28); ctx.quadraticCurveTo(R*0.12,-R*1.16,R*0.22,-R*1.00); ctx.closePath(); if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.4; ctx.stroke(); } ctx.fill(); }
+  if(m.hair==='short'||m.hair==='cap'){ dot(ctx,-R*0.74,R*0.08,15+OUTW*0.5,OUT); dot(ctx,-R*0.74,R*0.08,15,P.skin); dot(ctx,-R*0.74,R*0.08,7,P.skinD); }   // the ear breaks the cap
   if(m.hair==='tuft'){ ctx.beginPath(); ctx.moveTo(-R*0.10,-R*0.96); ctx.quadraticCurveTo(-R*0.05,-R*1.40,R*0.30,-R*1.30); ctx.quadraticCurveTo(R*0.12,-R*1.18,R*0.22,-R*0.98); ctx.closePath();
     if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.4; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
   ctx.restore(); }

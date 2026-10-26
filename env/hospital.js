@@ -5,7 +5,7 @@ function drawHospital(ctx,t,p,cam){
     const g=ctx.createLinearGradient(0,0,0,FL); g.addColorStop(0,'#2A3C5A'); g.addColorStop(1,'#1C2A44'); ctx.fillStyle=g; ctx.fillRect(-200,-200,W+400,FL+200);
     const r=ctx.createRadialGradient(W*0.5,H*0.0,0,W*0.5,H*0.0,H*0.9); r.addColorStop(0,'rgba(225,240,255,0.16)'); r.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle=r; ctx.fillRect(-200,-200,W+400,FL+200);
     // ceiling light strip
-    ctx.fillStyle='#E9F1FA'; rr(ctx,W*0.30,H*0.04,W*0.40,16,8); ctx.fill(); glowOn(ctx,'rgba(225,240,255,0.6)',30); ctx.fill(); glowOff(ctx);
+    ctx.fillStyle='#E9F1FA'; rr(ctx,W*0.30,H*0.07,W*0.40,16,8); ctx.fill(); glowOn(ctx,'rgba(225,240,255,0.6)',30); ctx.fill(); glowOff(ctx);
     // curtain track and curtain (drawn back, left)
     ctx.strokeStyle='#9FB0C6'; ctx.lineWidth=8; ctx.beginPath(); ctx.moveTo(W*0.04,H*0.12); ctx.lineTo(W*0.70,H*0.12); ctx.stroke();
     ctx.fillStyle='#5F8FB5'; ctx.beginPath(); ctx.moveTo(W*0.05,H*0.12); for(let i=0;i<7;i++){ const x=W*0.05+i*34; ctx.quadraticCurveTo(x+17,H*0.12+((i%2)?18:-6),x+34,H*0.12); } ctx.lineTo(W*0.05+7*34,FL-60); ctx.quadraticCurveTo(W*0.05+120,FL-40,W*0.05,FL-60); ctx.closePath(); ctx.fill();

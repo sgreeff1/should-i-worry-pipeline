@@ -20,7 +20,7 @@ window.drawEnv=function(name,t){
   if(name==='hospital'){ const D=staticPose('point',{standX:W*0.30,outfit:'doctor',face:[[0,'talking']]}); const Pt=staticPose('sit',{standX:W*0.63,outfit:'older',face:[[0,'worried']]}); Pt.floor=H*0.84-88;   // sitting on the trolley, feet dangling
     drawHospital(X,t,pose(D,t),cam0); chars([[Pt,t],[D,t]]); }
   if(name==='street'){ const A=staticPose('walk',{standX:W*0.42,outfit:'woman',face:[[0,'calm']]}); drawStreet(X,t,pose(A,t),cam0); chars([[A,t]]); }
-  if(name==='workplace'){ const A=staticPose('sit',{standX:W*0.36,outfit:'lead',face:[[0,'tired']]}); drawWorkplace(X,t,pose(A,t),cam0); chars([[A,t]]); }
+  if(name==='workplace'){ const A=staticPose('sit',{standX:W*0.40,outfit:'lead',face:[[0,'tired']]}); drawWorkplace(X,t,pose(A,t),cam0); chars([[A,t]]); }
   if(name==='void'){ const A=staticPose('think',{face:[[0,'thinking']]}); drawVoid(X,t,pose(A,t),cam0); chars([[A,t]]); }
   if(name==='body'){ drawBodyStage(X,t,cam0); const im=IMG.spine, s=H*0.9/im.height; X.drawImage(im,W/2-im.width*s/2,H*0.05,im.width*s,im.height*s); }
   grade(X,t); vignette(X); X.font='700 40px Inter'; X.fillStyle=P.ivory; X.textAlign='left'; X.fillText(name,60,90);

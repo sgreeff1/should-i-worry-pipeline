@@ -1,6 +1,6 @@
 # Animation System Spec
 
-Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 26 Oct 2026 (library commit `67d1192`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
+Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 26 Oct 2026 (library commit `cb4c1ef`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
 
 ## How an episode uses the library
 
@@ -13,7 +13,7 @@ An episode is a JSON file (`episodes/<ep>.json`): `library` (the commit that ren
 | `lead` | #2BB3A3 | — | no | 1 |
 | `woman` | #8C7BD3 | bob | no | 1 |
 | `older` | #9B4A5E | short | yes | 1 |
-| `child` | #6FB7E8 | tuft | no | 0.74 |
+| `child` | #6FB7E8 | cap | no | 0.74 |
 | `doctor` | #F2EBDD | — | yes | 1 |
 
 `alt` is an alias of `woman` (crowd colour from v1). Props do not scale with the child yet.

@@ -12,7 +12,7 @@ function drawMeter(ctx,t,o={}){
     const r=s*0.5, w=s*0.16, a0=Math.PI, a1=2*Math.PI;
     ctx.fillStyle='rgba(18,26,46,0.78)'; ctx.beginPath(); ctx.arc(0,0,r+w*0.75,a0-0.12,a1+0.12); ctx.lineTo(r+w*0.75,s*0.26); ctx.lineTo(-(r+w*0.75),s*0.26); ctx.closePath(); ctx.fill();   // backing plate
     METER_ZONES.forEach((z,i)=>{ const za=a0+(a1-a0)*i/3, zb=a0+(a1-a0)*(i+1)/3; ctx.strokeStyle=z.c; ctx.lineWidth=w; ctx.lineCap='butt'; ctx.beginPath(); ctx.arc(0,0,r,za+0.02,zb-0.02); ctx.stroke();
-      const am=(za+zb)/2; drawIcon(ctx,z.icon,Math.cos(am)*(r+w*0.95),Math.sin(am)*(r+w*0.95),s*0.13,t, undefined); });
+      const am=(za+zb)/2; drawIcon(ctx,z.icon,Math.cos(am)*(r+w*1.05),Math.sin(am)*(r+w*1.05),s*0.17,t, undefined); });
     if(window.STYLE.outline){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*0.6; ctx.beginPath(); ctx.arc(0,0,r+w/2,a0,a1); ctx.stroke(); ctx.beginPath(); ctx.arc(0,0,r-w/2,a0,a1); ctx.stroke(); }
     const ang=a0+(a1-a0)*v; meterNeedle(ctx,ang,r-w*0.2,s*0.03);
     dot(ctx,0,0,s*0.06,P.ivory); if(window.STYLE.outline){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*0.6; ctx.beginPath(); ctx.arc(0,0,s*0.06,0,7); ctx.stroke(); }
@@ -21,7 +21,7 @@ function drawMeter(ctx,t,o={}){
     const bw=s, bh=s*0.11, x0=-bw/2;
     ctx.fillStyle='rgba(18,26,46,0.78)'; rr(ctx,x0-s*0.16,-bh*2.6,bw+s*0.32,bh*6.2,s*0.06); ctx.fill();
     METER_ZONES.forEach((z,i)=>{ ctx.fillStyle=z.c; rr(ctx,x0+bw*i/3+ (i?2:0),-bh/2,bw/3-(i===2?0:2)-(i?2:0),bh,[i===0?bh/2:0,i===2?bh/2:0,i===2?bh/2:0,i===0?bh/2:0]); ctx.fill();
-      drawIcon(ctx,z.icon,x0+bw*(i+0.5)/3,-bh*1.55,s*0.11,t, undefined); });
+      drawIcon(ctx,z.icon,x0+bw*(i+0.5)/3,-bh*1.65,s*0.14,t, undefined); });
     if(window.STYLE.outline){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*0.6; rr(ctx,x0,-bh/2,bw,bh,bh/2); ctx.stroke(); }
     const mx=x0+bw*v; ctx.save(); ctx.translate(mx,0); ctx.fillStyle=P.ivory; ctx.beginPath(); ctx.moveTo(0,bh*0.95); ctx.lineTo(bh*0.7,bh*1.6); ctx.lineTo(-bh*0.7,bh*1.6); ctx.closePath(); ctx.fill(); if(window.STYLE.outline){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*0.6; ctx.stroke(); }
     dot(ctx,0,0,bh*0.42,P.ivory); if(window.STYLE.outline){ ctx.beginPath(); ctx.arc(0,0,bh*0.42,0,7); ctx.stroke(); } ctx.restore();
@@ -32,7 +32,7 @@ function drawMeter(ctx,t,o={}){
 // A meter track in the episode JSON: ep.meter = [{t0, t1, from, to, ease?, size?, x?, y?, style?}] — the value animates from→to over the window; between windows the last value holds.
 function meterValue(track,t){ let v=null; for(const m of track){ if(t>=m.t0){ const k=clamp((t-m.t0)/Math.max(0.01,(m.t1-m.t0))); v=lerp(m.from??(v??0), m.to, EASE[m.ease||'swing'](k)); } } return v; }
 function drawMeterTrack(ctx,t,track){ if(!track||!track.length) return; const cur=[...track].reverse().find(m=>t>=m.t0); if(!cur) return; const hold=cur.hold??4; const al=Math.min(clamp((t-cur.t0)/0.4), clamp((cur.t1+hold-t)/0.4)); if(al<=0) return;
-  const sz=cur.size??260; drawMeter(ctx,t,{x:cur.x??W*0.84,y:cur.y??H*0.20,size:sz,value:meterValue(track,t),style:cur.style||METER_STYLE,label:cur.label??(sz<320?false:undefined),alpha:al}); }   // corner overlays carry no label
+  const sz=cur.size??300; drawMeter(ctx,t,{x:cur.x??W*0.86,y:cur.y??H*0.70,size:sz,value:meterValue(track,t),style:cur.style||METER_STYLE,label:cur.label??(sz<320?false:undefined),alpha:al}); }   // corner overlays carry no label
 let METER_STYLE='gauge';
 
 // ---- the wordmark and the opening ident (two options) ----
@@ -56,6 +56,9 @@ function drawIdentChar(ctx,t,CXfn,o={}){
   const A=_identAnim; const p=pose(A,t); const cam={z:1.0,wx:W/2,wy:H/2,sx:W/2,sy:H/2,drift:0};
   drawVoid(ctx,t,p,cam,{floor:true});
   if(CXfn) CXfn(cx=>drawCharacter(cx,t,p)); else drawCharacter(ctx,t,p);
-  const q=EASE.ob(clamp((t-1.45)/0.35)); if(q>0){ ctx.save(); ctx.translate(p.cx+BODY.headR*0.9,p.cy-BODY.headR*1.35); ctx.scale(q,q); ctx.font='800 150px Inter'; ctx.textAlign='center'; ctx.fillStyle=P.amber; if(window.STYLE.outline){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.5; ctx.strokeText('?',0,50); } ctx.fillText('?',0,50); ctx.restore(); }
-  const k=EASE.ob(clamp((t-1.3)/0.45)); if(k>0){ ctx.save(); ctx.translate(W*0.70,H*0.50); ctx.scale(k,k); wordmark(ctx,0,0,96); ctx.restore(); }
+  // the wordmark without its "?", then the character's "?" flies from above the head to the end of the words
+  const k=EASE.ob(clamp((t-1.3)/0.45)); let endX=0, baseY=H*0.50; const size=96;
+  if(k>0){ ctx.save(); ctx.translate(W*0.72,baseY); ctx.scale(k,k); ctx.font=`800 ${size}px Inter`; ctx.textAlign='left'; const a='Should I Worry'; const wa=ctx.measureText(a).width; ctx.fillStyle=P.ivory; ctx.fillText(a,-wa/2,0); endX=W*0.72+wa/2*k; ctx.restore(); }
+  const q=EASE.ob(clamp((t-1.45)/0.35)); if(q>0){ const fly=EASE.io(clamp((t-1.85)/0.35)); const sx=p.cx+BODY.headR*0.9, sy=p.cy-BODY.headR*1.35+50; const tx=endX+size*0.36, ty=baseY; const fs=lerp(150,size,fly);
+    ctx.save(); ctx.translate(lerp(sx,tx,fly),lerp(sy,ty,fly)); ctx.scale(q,q); ctx.font=`800 ${fs}px Inter`; ctx.textAlign='center'; ctx.fillStyle=P.amber; if(window.STYLE.outline&&fly<1){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.5*(1-fly); ctx.strokeText('?',0,0); } ctx.fillText('?',0,0); ctx.restore(); }
 }

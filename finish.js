@@ -5,7 +5,7 @@ function disclaimer(ctx,t){
   ctx.fillText('General education, not medical advice', W-50, H-46); ctx.globalAlpha=1;
 }
 function tag(ctx,text){
-  ctx.font=STYLE_FONT.tag; ctx.textAlign='left'; ctx.globalAlpha=0.55; ctx.fillStyle=P.ivory;
+  ctx.font=STYLE_FONT.tag; ctx.textAlign='left'; const w=ctx.measureText(text).width; ctx.globalAlpha=0.75; rr(ctx,28,24,w+24,34,10); ctx.fillStyle=P.navyD; ctx.fill(); ctx.globalAlpha=0.7; ctx.fillStyle=P.ivory;
   ctx.fillText(text, 40, 48); ctx.globalAlpha=1;
 }
 
