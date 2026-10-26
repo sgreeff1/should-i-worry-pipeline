@@ -1,6 +1,16 @@
 // rig.js — the character: skeleton, pose solver, two-pass seamless drawing
 const BODY = { thigh:96, shin:92, torso:222, neck:12, headR:108, uarm:122, farm:116, hand:31, armU:192,
                torsoW:150, shoulderR:46, legW:64, armW:58, footW:132, footH:44 };
+// ---------- the cast (Decision #45, 26 Oct 2026): five members on one rig; a member = outfit colours + head dressing (+ scale for the child)
+const CAST = {
+  lead:   { top:P.teal,    topD:P.tealD,  pants:P.pants,   pantsD:P.pantsD, hair:null,    glasses:false, scale:1 },
+  woman:  { top:'#8C7BD3', topD:'#7363B5', pants:'#3A4F7A', pantsD:'#2D3F63', hair:'bob',   glasses:false, scale:1 },
+  older:  { top:'#9B4A5E', topD:'#7E3A4B', pants:'#4A4F5C', pantsD:'#3A3E49', hair:'short', glasses:true,  scale:1 },
+  child:  { top:'#6FB7E8', topD:'#5597C4', pants:'#3A4F7A', pantsD:'#2D3F63', hair:'tuft',  glasses:false, scale:0.74 },
+  doctor: { top:'#F2EBDD', topD:'#D9CFB8', pants:'#2B3B62', pantsD:'#22304F', hair:null,    glasses:true,  scale:1 },
+};
+CAST.alt = CAST.woman;   // crowd colour from v1 = the woman's outfit
+const HAIR = { bob:'#3B2A2E', short:P.ivoryD, tuft:'#B3472F' };
 function pose(A,t){
   const K=A.K, FLOOR=A.floor, STAND_X=A.standX; const id=A.idle(t), tr=A.tremble(t);
   const hx = STAND_X - 6 + ch(K.hx,t) + tr*0.8;
@@ -70,8 +80,9 @@ function armPose(keys, p, side, lag){
 // ---------- character drawing ----------
 function drawCharacter(ctx,t,p){
   const A=p.A;
-  const OUTFIT = p.outfit==='doctor' ? {top:'#F2EBDD', topD:'#D9CFB8', pants:'#2B3B62', pantsD:'#22304F'} : p.outfit==='alt' ? {top:'#8C7BD3', topD:'#7363B5', pants:'#3A4F7A', pantsD:'#2D3F63'} : {top:P.teal, topD:P.tealD, pants:P.pants, pantsD:P.pantsD};
-  ctx.save(); if(p.rot){ ctx.translate(p.hx,p.hy); ctx.rotate(p.rot); ctx.translate(-p.hx,-p.hy); } const near=armPose(A.ARM_NEAR,p,'near',0.0), far=armPose(A.ARM_FAR,p,'far',0.06);
+  const OUTFIT = CAST[p.outfit] || CAST.lead;
+  ctx.save(); const CS=(CAST[p.outfit]||CAST.lead).scale; if(CS!==1){ const fx=(p.fN[0]+p.fF[0])/2, fy=p.A.floor; ctx.translate(fx,fy); ctx.scale(CS,CS); ctx.translate(-fx,-fy); }
+  if(p.rot){ ctx.translate(p.hx,p.hy); ctx.rotate(p.rot); ctx.translate(-p.hx,-p.hy); } const near=armPose(A.ARM_NEAR,p,'near',0.0), far=armPose(A.ARM_FAR,p,'far',0.06);
   const face=step(A.FACE,t);
   const bodyClip=()=>{ ctx.beginPath(); ctx.save(); localCtx(ctx,p); sweaterPath(ctx); pelvisPath(ctx); ctx.restore(); };
   outlinePass(ctx,p,near,far);
@@ -131,6 +142,7 @@ function drawCharacter(ctx,t,p){
   }
   if(near.state==='point'){ const a=Math.atan2(near.w[1]-near.e[1],near.w[0]-near.e[0]); if(window.STYLE.outline){capPath(ctx,near.w[0],near.w[1],near.w[0]+Math.cos(a)*34,near.w[1]+Math.sin(a)*34,14+OUTW*1.6); ctx.strokeStyle=OUT; ctx.stroke();} capPath(ctx,near.w[0],near.w[1],near.w[0]+Math.cos(a)*34,near.w[1]+Math.sin(a)*34,14); ctx.strokeStyle=P.skin; ctx.stroke(); dot(ctx,near.w[0],near.w[1],BODY.hand-1,P.skin); }
   if(p.outfit==='doctor') drawDoctorBits(ctx,p,near);
+  if((CAST[p.outfit]||CAST.lead).glasses) drawGlasses(ctx,p);
   ctx.restore();
 }
 function drawDoctorBits(ctx,p,near){ // coat lapels, stethoscope, glasses
@@ -138,10 +150,10 @@ function drawDoctorBits(ctx,p,near){ // coat lapels, stethoscope, glasses
   ctx.fillStyle='#E3D8C0'; ctx.beginPath(); ctx.moveTo(-14,236); ctx.lineTo(18,236); ctx.lineTo(4,150); ctx.lineTo(-10,160); ctx.closePath(); ctx.fill();
   ctx.strokeStyle='#2A3B5C'; ctx.lineWidth=6; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(-6,222); ctx.quadraticCurveTo(40,170,30,120); ctx.stroke(); dot(ctx,30,116,12,'#9AA8C2'); dot(ctx,30,116,6,'#2A3B5C');
   ctx.restore();
-  ctx.save(); ctx.translate(p.cx,p.cy); ctx.rotate(p.hdir); const R=BODY.headR; ctx.strokeStyle=OUT; ctx.lineWidth=4;
-  ctx.beginPath(); ctx.arc(R*0.26,-R*0.10,19,0,7); ctx.stroke(); ctx.beginPath(); ctx.arc(R*0.66,-R*0.07,19,0,7); ctx.stroke(); ctx.beginPath(); ctx.moveTo(R*0.26+19,-R*0.10); ctx.lineTo(R*0.66-19,-R*0.07); ctx.stroke();
-  ctx.restore();
 }
+function drawGlasses(ctx,p){ ctx.save(); ctx.translate(p.cx,p.cy); ctx.rotate(p.hdir); const R=BODY.headR; ctx.strokeStyle=OUT; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.arc(R*0.26,-R*0.10,19,0,7); ctx.stroke(); ctx.beginPath(); ctx.arc(R*0.66,-R*0.07,19,0,7); ctx.stroke(); ctx.beginPath(); ctx.moveTo(R*0.26+19,-R*0.10); ctx.lineTo(R*0.66-19,-R*0.07); ctx.stroke();
+  ctx.restore(); }
 function shoe(ctx,x,y,color){ ctx.fillStyle=color; shoePath(ctx,x,y); ctx.fill();
   ctx.fillStyle=OUT; ctx.globalAlpha=0.9; rr(ctx,x-BODY.footW*0.40,y+BODY.footH/2-9,BODY.footW,9,4); ctx.fill(); ctx.globalAlpha=1; }
 
@@ -185,14 +197,26 @@ function contactShadow(ctx,clipFn,x1,y1,x2,y2,w,alpha){
   capPath(ctx,x1-5,y1+7,x2-5,y2+7,w+6); ctx.stroke();
   ctx.restore();
 }
+function drawHair(ctx,p,R){ // head-local coords: face toward +x, top at -y. Hair carries its own outline (it sits outside the head circle).
+  const m=CAST[p.outfit]||CAST.lead; if(!m.hair) return; const col=HAIR[m.hair]; const o=window.STYLE.outline;
+  ctx.save(); ctx.lineJoin='round';
+  if(m.hair==='bob'){ ctx.beginPath(); ctx.moveTo(-R*1.08,R*0.62); ctx.lineTo(-R*1.08,-R*0.05); ctx.arc(0,0,R*1.08,Math.PI,Math.PI*2.08); ctx.quadraticCurveTo(R*0.55,-R*0.55,R*0.30,-R*0.95); ctx.quadraticCurveTo(-R*0.2,-R*0.75,-R*0.72,-R*0.70); ctx.lineTo(-R*0.72,R*0.62); ctx.closePath();
+    if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.6; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
+  if(m.hair==='short'){ ctx.beginPath(); ctx.arc(0,0,R*1.05,Math.PI*0.98,Math.PI*1.80); ctx.arc(0,0,R*0.76,Math.PI*1.80,Math.PI*0.98,true); ctx.closePath();
+    if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.6; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
+  if(m.hair==='tuft'){ ctx.beginPath(); ctx.moveTo(-R*0.10,-R*0.96); ctx.quadraticCurveTo(-R*0.05,-R*1.40,R*0.30,-R*1.30); ctx.quadraticCurveTo(R*0.12,-R*1.18,R*0.22,-R*0.98); ctx.closePath();
+    if(o){ ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*1.4; ctx.stroke(); } ctx.fillStyle=col; ctx.fill(); }
+  ctx.restore(); }
 function drawHead(ctx,t,p,face){
   const {cx,cy,hdir}=p; const R=BODY.headR;
   ctx.save(); ctx.translate(cx,cy); ctx.rotate(hdir);
   // squash on the jolt, then a small overshoot back
   { const k=t-4.40; let sq=0; if(k>=0&&k<0.10) sq=0.13*EASE.out(k/0.10); else if(k>=0.10&&k<0.32) sq=0.13-0.19*EASE.io((k-0.10)/0.22); else if(k>=0.32&&k<0.55) sq=-0.06+0.06*EASE.io((k-0.32)/0.23); ctx.scale(1+sq,1-sq); }
+  if((CAST[p.outfit]||CAST.lead).scale<1) ctx.scale(1.12,1.12);   // child: bigger head on a smaller body
   dot(ctx,0,0,R,P.skin);
   if(window.STYLE.shade){ const g=ctx.createRadialGradient(R*0.1,-R*0.2,R*0.3,0,0,R); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(120,70,40,0.16)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,R,0,7); ctx.fill(); }
   dot(ctx,-R*0.74,R*0.08,15,P.skin); dot(ctx,-R*0.74,R*0.08,7,P.skinD);                 // ear
+  drawHair(ctx,p,R);
   const BLINKS=p.A.BLINKS, SWEAT=p.A.SWEAT, SOCK_X=p.A.sockX, FLOOR=p.A.floor;
   const blinking = BLINKS.some(b=>t>=b && t<b+0.11) && (face==='calm'||face==='focus'||face==='relief');
   // where is he looking? toward the sock (down/forward) in local head space

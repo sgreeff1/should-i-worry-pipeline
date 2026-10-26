@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="style.js"></script><script src="core.js"></script><script src="icons.js"></script>
+<script>
+const C=document.getElementById('c'), X=C.getContext('2d');
+window.ready = Promise.all([document.fonts.load('700 22px Inter'), document.fonts.load('600 28px Inter')]);
+window.iconNames=()=>Object.keys(ICON);
+// grid of every icon in the set, numbered, in its default colour (state colour for organs = normal)
+window.drawIconGrid=function(t,cols=7){
+  X.setTransform(1,0,0,1,0,0); X.fillStyle=P.navy; X.fillRect(0,0,W,H);
+  const names=Object.keys(ICON), cw=W/cols, rows=Math.ceil(names.length/cols), ch=(H-80)/rows;
+  names.forEach((nm,i)=>{ const x=(i%cols+0.5)*cw, y=80+(Math.floor(i/cols)+0.5)*ch-14; drawIcon(X,nm,x,y,Math.min(ch*0.55,150),t);
+    X.font='600 28px Inter'; X.fillStyle=P.ivory; X.textAlign='center'; X.fillText(`${i+1}. ${nm}`,x,y+Math.min(ch*0.55,150)*0.62+12); });
+  X.font='700 34px Inter'; X.fillStyle=P.ivoryD; X.textAlign='left'; X.fillText(`Icon set — ${names.length} icons (icons.js)`,40,54);
+};
+</script></body></html>
