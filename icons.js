@@ -8,8 +8,8 @@ const organAlert=(c)=> !!c && c!==P.organ && c!==P.teal;
 function organHalo(ctx,t,c){ if(!organAlert(c)) return; ctx.save(); ctx.globalCompositeOperation='lighter';
   const a=0.55+0.25*Math.sin(t*5); const g=ctx.createRadialGradient(0,0,10,0,0,78); g.addColorStop(0,`rgba(235,87,87,${0.55*a})`); g.addColorStop(0.6,`rgba(235,87,87,${0.22*a})`); g.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,78,0,7); ctx.fill(); ctx.restore(); }
-function organShade(ctx,pathFn){ if(!window.STYLE.shade) return; ctx.save(); pathFn(ctx); ctx.clip();
-  const g=ctx.createRadialGradient(-10,-14,6,0,0,46); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(90,30,40,0.20)'); ctx.fillStyle=g; ctx.fillRect(-50,-50,100,100);
+function organShade(ctx,pathFn,tint='rgba(90,30,40,0.20)'){ if(!window.STYLE.shade) return; ctx.save(); pathFn(ctx); ctx.clip();
+  const g=ctx.createRadialGradient(-10,-14,6,0,0,46); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,tint); ctx.fillStyle=g; ctx.fillRect(-50,-50,100,100);
   ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.beginPath(); ctx.ellipse(-18,-24,9,5,-0.5,0,7); ctx.fill(); ctx.restore(); }   // gloss
 function organOutline(ctx,pathFn){ if(!window.STYLE.outline) return; ctx.save(); pathFn(ctx); ctx.strokeStyle=OUT; ctx.lineWidth=OUTW*0.75; ctx.lineJoin='round'; ctx.stroke(); ctx.restore(); }
 function organFluid(ctx,pathFn,level,t){ ctx.save(); pathFn(ctx); ctx.clip(); const y=34-level*68; ctx.beginPath(); ctx.moveTo(-50,y+1.5*Math.sin(t*2.2));
@@ -57,3 +57,47 @@ const ICON = {
   person:(ctx,t,c=P.teal)=>{ ctx.fillStyle=c; ctx.beginPath(); ctx.arc(0,-30,16,0,7); ctx.fill(); rr(ctx,-20,-10,40,56,14); ctx.fill(); },
 };
 function drawIcon(ctx,name,x,y,size,t,color,alpha=1){ const f=ICON[name]; if(!f) return; ctx.save(); ctx.translate(x,y); ctx.scale(size/100,size/100); ctx.globalAlpha=alpha; f(ctx,t,color); ctx.restore(); }
+
+// ---- the first organ set (Decision #47): spine (vertebra, disc, nerve), brain, heart, knee, bone. Bones ivory, nerves yellow, organs rose; all with faces.
+const BONE_SHADE='rgba(80,60,30,0.22)', NERVE_SHADE='rgba(120,80,0,0.22)';
+function vertebraBody(ctx){ ctx.beginPath(); ctx.moveTo(-40,-14); ctx.quadraticCurveTo(-42,-46,0,-44); ctx.quadraticCurveTo(42,-46,40,-14); ctx.quadraticCurveTo(38,4,0,2); ctx.quadraticCurveTo(-38,4,-40,-14); ctx.closePath(); }   // the body (bean), seen from above
+function vertebraArch(ctx){ ctx.beginPath(); ctx.moveTo(-20,-4); ctx.quadraticCurveTo(-34,0,-34,14); ctx.lineTo(-54,22); ctx.lineTo(-50,32); ctx.lineTo(-28,28); ctx.quadraticCurveTo(-22,40,-8,40); ctx.lineTo(-6,58); ctx.lineTo(6,58); ctx.lineTo(8,40); ctx.quadraticCurveTo(22,40,28,28); ctx.lineTo(50,32); ctx.lineTo(54,22); ctx.lineTo(34,14); ctx.quadraticCurveTo(34,0,20,-4); ctx.closePath(); }   // arch with transverse processes and the spinous process
+function vertebraHole(ctx){ ctx.beginPath(); ctx.ellipse(0,14,14,11,0,0,7); ctx.closePath(); }   // the canal the cord runs through
+function discBody(ctx){ ctx.beginPath(); ctx.ellipse(0,4,46,24,0,0,7); ctx.closePath(); }
+function brainBody(ctx){ ctx.beginPath(); ctx.moveTo(-6,34); ctx.quadraticCurveTo(-44,34,-44,2); ctx.quadraticCurveTo(-46,-30,-14,-36); ctx.quadraticCurveTo(0,-42,14,-36); ctx.quadraticCurveTo(46,-30,44,2); ctx.quadraticCurveTo(44,30,16,34); ctx.quadraticCurveTo(10,42,0,36); ctx.quadraticCurveTo(-4,40,-6,34); ctx.closePath(); }
+function heartBody(ctx){ ctx.beginPath(); ctx.moveTo(-8,-26); ctx.quadraticCurveTo(-44,-30,-42,4); ctx.quadraticCurveTo(-40,30,0,48); ctx.quadraticCurveTo(40,30,42,0); ctx.quadraticCurveTo(44,-26,12,-24); ctx.quadraticCurveTo(4,-20,-8,-26); ctx.closePath(); }   // an anatomical heart, apex down-right
+function boneBody(ctx){ ctx.beginPath(); ctx.moveTo(-14,-30); ctx.lineTo(14,-30); ctx.quadraticCurveTo(32,-50,34,-36); ctx.quadraticCurveTo(44,-28,28,-20); ctx.lineTo(12,30); ctx.quadraticCurveTo(34,36,30,50); ctx.quadraticCurveTo(18,60,8,46); ctx.lineTo(-8,46); ctx.quadraticCurveTo(-18,60,-30,50); ctx.quadraticCurveTo(-34,36,-12,30); ctx.lineTo(-28,-20); ctx.quadraticCurveTo(-44,-28,-34,-36); ctx.quadraticCurveTo(-32,-50,-14,-30); ctx.closePath(); }
+function kneeFemur(ctx){ ctx.beginPath(); ctx.moveTo(-12,-56); ctx.lineTo(12,-56); ctx.lineTo(14,-22); ctx.quadraticCurveTo(40,-20,36,2); ctx.quadraticCurveTo(20,10,0,4); ctx.quadraticCurveTo(-20,10,-36,2); ctx.quadraticCurveTo(-40,-20,-14,-22); ctx.closePath(); }
+function kneeTibia(ctx){ ctx.beginPath(); ctx.moveTo(-34,16); ctx.quadraticCurveTo(0,8,34,16); ctx.quadraticCurveTo(26,30,12,32); ctx.lineTo(10,58); ctx.lineTo(-10,58); ctx.lineTo(-12,32); ctx.quadraticCurveTo(-26,30,-34,16); ctx.closePath(); }
+function kneePatella(ctx){ ctx.beginPath(); ctx.ellipse(0,-6,16,19,0,0,7); ctx.closePath(); }
+function nerveBody(ctx){ ctx.beginPath(); ctx.moveTo(-11,-54); ctx.lineTo(11,-54); ctx.lineTo(11,54); ctx.lineTo(-11,54); ctx.closePath(); }
+function nerveRoots(ctx,c){ ctx.strokeStyle=c; ctx.lineWidth=8; ctx.lineCap='round'; ctx.beginPath(); for(const y of [-30,-2,26]){ ctx.moveTo(-9,y); ctx.quadraticCurveTo(-26,y+4,-38,y+22); ctx.moveTo(9,y); ctx.quadraticCurveTo(26,y+4,38,y+22); } ctx.stroke(); }
+function smallFace(ctx,t,mood,sc=0.7,dy=0){ ctx.save(); ctx.translate(0,dy); ctx.scale(sc,sc); organFace(ctx,t,mood); ctx.restore(); }
+Object.assign(ICON,{
+  vertebra:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    ctx.fillStyle=P.ivoryD; vertebraArch(ctx); ctx.fill(); organOutline(ctx,vertebraArch); ctx.fillStyle=P.navyD; vertebraHole(ctx); ctx.fill();
+    ctx.fillStyle=P.ivory; vertebraBody(ctx); ctx.fill(); organShade(ctx,vertebraBody,BONE_SHADE); smallFace(ctx,t,m,0.7,-12); organOutline(ctx,vertebraBody); },
+  disc:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    ctx.fillStyle=P.disc; discBody(ctx); ctx.fill(); ctx.fillStyle=P.ivory; ctx.beginPath(); ctx.ellipse(0,4,22,11,0,0,7); ctx.fill();   // tough ring, soft centre (colour code)
+    organShade(ctx,discBody,'rgba(40,60,90,0.25)'); smallFace(ctx,t,m,0.6,4); organOutline(ctx,discBody); },
+  nerve:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    if(window.STYLE.outline){ ctx.save(); nerveRoots(ctx,OUT); ctx.lineWidth=8+OUTW*0.9; ctx.stroke(); ctx.restore(); } nerveRoots(ctx,P.yellow);
+    ctx.fillStyle=P.yellow; nerveBody(ctx); ctx.fill(); organShade(ctx,nerveBody,NERVE_SHADE); smallFace(ctx,t,m,0.6,-16); organOutline(ctx,nerveBody); },
+  brain:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    ctx.fillStyle=P.organ; brainBody(ctx); ctx.fill(); organShade(ctx,brainBody);
+    ctx.save(); brainBody(ctx); ctx.clip(); ctx.strokeStyle=P.organD; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.beginPath();   // gyri
+    ctx.moveTo(-30,-10); ctx.quadraticCurveTo(-22,-26,-10,-14); ctx.moveTo(-34,14); ctx.quadraticCurveTo(-24,6,-20,22); ctx.moveTo(10,-30); ctx.quadraticCurveTo(22,-22,30,-30); ctx.moveTo(22,8); ctx.quadraticCurveTo(32,16,26,26); ctx.moveTo(0,-36); ctx.lineTo(0,36); ctx.stroke(); ctx.restore();
+    smallFace(ctx,t,m,0.75,6); organOutline(ctx,brainBody); },
+  heart:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm'; const beat=1+0.03*Math.max(0,Math.sin(t*7.5))**8;
+    ctx.save(); ctx.scale(beat,beat);
+    ctx.strokeStyle=P.organD; ctx.lineWidth=10; ctx.lineCap='round'; if(window.STYLE.outline){ ctx.save(); ctx.strokeStyle=OUT; ctx.lineWidth=10+OUTW*0.9; ctx.beginPath(); ctx.moveTo(-2,-26); ctx.lineTo(-2,-50); ctx.moveTo(14,-26); ctx.quadraticCurveTo(26,-40,34,-46); ctx.stroke(); ctx.restore(); }
+    ctx.beginPath(); ctx.moveTo(-2,-26); ctx.lineTo(-2,-50); ctx.moveTo(14,-26); ctx.quadraticCurveTo(26,-40,34,-46); ctx.stroke();   // aorta + pulmonary trunk
+    ctx.fillStyle=P.organ; heartBody(ctx); ctx.fill(); organShade(ctx,heartBody); smallFace(ctx,t,m,0.75,2); organOutline(ctx,heartBody); ctx.restore(); },
+  knee:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    ctx.fillStyle=P.ivory; kneeFemur(ctx); ctx.fill(); organShade(ctx,kneeFemur,BONE_SHADE); organOutline(ctx,kneeFemur);
+    kneeTibia(ctx); ctx.fillStyle=P.ivory; ctx.fill(); organShade(ctx,kneeTibia,BONE_SHADE); organOutline(ctx,kneeTibia);
+    ctx.fillStyle=P.disc; ctx.beginPath(); ctx.ellipse(0,8,30,5,0,0,7); ctx.fill();   // joint space / cartilage in the disc blue-grey
+    ctx.fillStyle=P.ivory; kneePatella(ctx); ctx.fill(); organShade(ctx,kneePatella,BONE_SHADE); smallFace(ctx,t,m,0.45,-6); organOutline(ctx,kneePatella); },
+  bone:(ctx,t,c)=>{ organHalo(ctx,t,c); const m=organAlert(c)?'worried':'calm';
+    ctx.fillStyle=P.ivory; boneBody(ctx); ctx.fill(); organShade(ctx,boneBody,BONE_SHADE); smallFace(ctx,t,m,0.6,6); organOutline(ctx,boneBody); },
+});

@@ -1,7 +1,7 @@
 // style.js — the single source of truth for the channel look. Every scene reads from here.
 const W = 1920, H = 1080;
 const P = { navy:'#1F2A44', navyD:'#121A2E', navyL:'#2B3B62', teal:'#2BB3A3', tealD:'#23958A', amber:'#F2994A',
-            red:'#EB5757', redD:'#C94545', ivory:'#EDE6D6', ivoryD:'#CFC6B2', yellow:'#F2C94C', white:'#FFFFFF',
+            red:'#EB5757', redD:'#C94545', ivory:'#EDE6D6', ivoryD:'#CFC6B2', yellow:'#F2C94C', white:'#FFFFFF', disc:'#8FA9C4',
             skin:'#F0C7A0', skinD:'#D9AD86', organ:'#E8949F', organD:'#C46A77', organL:'#F7C6CC', pants:'#2B3B62', pantsD:'#22304F', shoe:'#EDE6D6',
             floorNear:'#D9C9A8', floorFar:'#B9A585', plank:'#A89474', wallTop:'#1C2642', wallBot:'#131B31' };
 const OUT='#141A2E'; let OUTW=6;   // silhouette outline weight (0 = none)

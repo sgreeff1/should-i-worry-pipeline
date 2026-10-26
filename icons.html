@@ -6,6 +6,12 @@
 const C=document.getElementById('c'), X=C.getContext('2d');
 window.ready = Promise.all([document.fonts.load('700 22px Inter'), document.fonts.load('600 28px Inter')]);
 window.iconNames=()=>Object.keys(ICON);
+// organ sheet: the eight organ icons, normal state (top) and red-flag state (bottom)
+window.drawOrganSheet=function(t){ X.setTransform(1,0,0,1,0,0); X.fillStyle=P.navy; X.fillRect(0,0,W,H);
+  const names=['bladder','vertebra','disc','nerve','brain','heart','knee','bone']; const cw=W/names.length;
+  names.forEach((nm,i)=>{ const x=(i+0.5)*cw; drawIcon(X,nm,x,H*0.30,190,t); drawIcon(X,nm,x,H*0.72,190,t,P.red);
+    X.font='600 30px Inter'; X.fillStyle=P.ivory; X.textAlign='center'; X.fillText(`${i+1}. ${nm}`,x,H*0.30+150); });
+  X.font='700 34px Inter'; X.fillStyle=P.ivoryD; X.textAlign='left'; X.fillText('Checkpoint C · organ set (Decision #47) — normal state',40,54); X.fillText('Red-flag state (halo, worried face)',40,H*0.50+10); };
 // grid of every icon in the set, numbered, in its default colour (state colour for organs = normal)
 window.drawIconGrid=function(t,cols=7){
   X.setTransform(1,0,0,1,0,0); X.fillStyle=P.navy; X.fillRect(0,0,W,H);
