@@ -22,5 +22,6 @@ function drawEpisode(ctx,t,CX,CC,OC2){
   if(fade<1 && idx>0 && !sh.cut){ const pv=EP.shots[idx-1]; const o=OC2.getContext('2d'); o.setTransform(1,0,0,1,0,0); o.fillStyle=P.navyD; o.fillRect(0,0,W,H); drawShot(o,pv,Math.min(t,pv.t1-0.001),CX,CC); ctx.globalAlpha=1-fade; ctx.drawImage(OC2,0,0); ctx.globalAlpha=1; }
   for(const c of EP.cards) card(ctx,c[0],c[1],t,c[2]);
   for(const c of EP.cites) cite(ctx,c[0],c[1],t,c[2]);
+  drawMeterTrack(ctx,t,EP.meter);   // worry meter overlay (Decision #46)
   grade(ctx,t); vignette(ctx); disclaimer(ctx,t); if(EP.tag) tag(ctx,EP.tag);
 }

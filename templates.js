@@ -96,7 +96,10 @@ const TEMPLATES = {
       drawIcon(ctx,ic,W*0.1+110,H*0.14+75,110,t); ctx.font='800 72px Inter'; ctx.fillStyle=col; ctx.textAlign='left'; ctx.fillText(spec.tier,W*0.1+200,H*0.14+100); if(spec.sub){ ctx.font='500 36px Inter'; ctx.fillStyle=P.ivory; ctx.fillText(spec.sub,W*0.1+200+ctx.measureText(spec.tier).width*2+40,H*0.14+98); } ctx.restore();
       const items=spec.items||[]; items.forEach((it,i)=>{ const x=W/2+(i-(items.length-1)/2)*380, y=H*0.58; const kk=popIn(t,0.5+i*0.3); if(kk<=0) return; ctx.save(); ctx.translate(x,y); ctx.scale(kk,kk); drawIcon(ctx,it.icon,0,0,170,t,it.color); ctx.restore(); if(it.label){ ctx.font='600 36px Inter'; ctx.fillStyle=P.ivory; ctx.textAlign='center'; ctx.globalAlpha=kk; ctx.fillText(it.label,x,y+140); ctx.globalAlpha=1; } }); }); },
   // 8. CHAPTER — title card with an inset
-  CHAPTER:(ctx,t,spec,S)=>{ const cam=pushCam(t,S.dur,1,1.03); S.cam=cam; drawVoid(ctx,t,null,cam,{floor:false});
+  CHAPTER:(ctx,t,spec,S)=>{ const cam=pushCam(t,S.dur,1,1.03); S.cam=cam;
+    if(spec.ident==='dial'){ drawVoid(ctx,t,null,cam,{floor:false}); layer(ctx,cam,1.0,()=>drawIdentDial(ctx,t,spec)); return; }   // opening ident, option 1
+    if(spec.ident==='char'){ drawIdentChar(ctx,t,S.char,spec); return; }                                                        // opening ident, option 2
+    drawVoid(ctx,t,null,cam,{floor:false});
     layer(ctx,cam,1.0,()=>{ const k=EASE.out(clamp(t/0.6)); ctx.globalAlpha=k; ctx.font='500 44px Inter'; ctx.fillStyle=P.amber; ctx.textAlign='left'; ctx.fillText(spec.kicker||'',W*0.12,H*0.36); ctx.font='800 92px Inter'; ctx.fillStyle=P.ivory; ctx.fillText(spec.title,W*0.12,H*0.48); ctx.strokeStyle=P.teal; ctx.lineWidth=8; ctx.beginPath(); ctx.moveTo(W*0.12,H*0.53); ctx.lineTo(W*0.12+360*k,H*0.53); ctx.stroke(); ctx.globalAlpha=1;
       if(spec.inset){ const q=popIn(t,0.5,0.5); if(q>0){ ctx.save(); ctx.translate(W*0.75,H*0.46); ctx.scale(q,q); if(IMG[spec.inset]){ const im=IMG[spec.inset], h=H*0.6, w=im.width*h/im.height; glowOn(ctx,'rgba(43,179,163,0.4)',40); ctx.drawImage(im,-w/2,-h/2,w,h); glowOff(ctx); } else drawIcon(ctx,spec.inset,0,0,320,t); ctx.restore(); } } }); },
   // 9. GLOBE — a true rotating Earth (globe.js: d3-geo orthographic + Natural Earth land) with pop-up markers on real cities
@@ -104,6 +107,6 @@ const TEMPLATES = {
     layer(ctx,cam,1.0,()=>{ const a=EASE.io(clamp(t/0.6)); ctx.save(); ctx.translate(W/2,H*0.43); ctx.scale(a,a); drawGlobe(ctx,t,spec); ctx.restore(); }); },
   // 10. END — end card
   END:(ctx,t,spec,S)=>{ const cam={z:1,wx:W/2,wy:H/2,sx:W/2,sy:H/2,drift:0}; S.cam=cam; drawVoid(ctx,t,null,cam,{floor:false,tint:P.navy});
-    const k=EASE.out(clamp(t/0.6)); ctx.globalAlpha=k; ctx.textAlign='center'; ctx.font='800 72px Inter'; ctx.fillStyle=P.ivory; ctx.fillText(spec.title||'Should I Worry?',W/2,H*0.30);
-    ctx.font='500 34px Inter'; ctx.fillStyle=P.ivory; (spec.lines||[]).forEach((l,i)=>ctx.fillText(l,W/2,H*0.42+i*50)); ctx.font='700 40px Inter'; ctx.fillStyle=P.teal; ctx.fillText(spec.cta||'Subscribe for the next one',W/2,H*0.80); ctx.globalAlpha=1; },
+    const k=EASE.out(clamp(t/0.6)); ctx.globalAlpha=k; if(spec.title){ ctx.textAlign='center'; ctx.font='800 72px Inter'; ctx.fillStyle=P.ivory; ctx.fillText(spec.title,W/2,H*0.30); } else { wordmark(ctx,W/2,H*0.26,84,k); if(spec.meter!==false) drawMeter(ctx,t,{x:W/2,y:H*0.68,size:280,value:spec.meterValue??0.45,style:METER_STYLE,label:false,alpha:k}); }
+    ctx.font='500 34px Inter'; ctx.fillStyle=P.ivory; ctx.textAlign='center'; (spec.lines||[]).forEach((l,i)=>ctx.fillText(l,W/2,H*(spec.title?0.42:0.36)+i*50)); ctx.font='700 40px Inter'; ctx.fillStyle=P.teal; ctx.fillText(spec.cta||'Subscribe for the next one',W/2,H*0.88); ctx.globalAlpha=1; },
 };
