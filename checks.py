@@ -4,6 +4,18 @@ import json, re, subprocess, sys
 ep=json.load(open(sys.argv[1])); video=sys.argv[2] if len(sys.argv)>2 and sys.argv[2].endswith('.mp4') else None
 timings=json.load(open(sys.argv[3])) if len(sys.argv)>3 else None
 fails=[]; notes=[]
+# library version stamp (Decision #50): every episode records the pipeline commit that rendered it
+if not ep.get('library'): fails.append("library: episode JSON has no 'library' field (pipeline commit / version)")
+else: notes.append(f"library {ep['library']}")
+# cast names must exist (Decision #45)
+CAST={'lead','woman','older','child','doctor','alt','default'}
+for s in ep['shots']:
+    for o in ([s.get('outfit')] if s.get('outfit') else [])+list(s.get('outfits') or []):
+        if o not in CAST: fails.append(f"cast: shot {s['id']} uses unknown member {o!r}")
+# worry meter values stay inside the dial
+for m in ep.get('meter') or []:
+    for k in ('from','to'):
+        if k in m and not (0<=m[k]<=1): fails.append(f"meter: {k}={m[k]} outside 0..1 at t0={m['t0']}")
 # 4.5 cards ≤ 7 words
 for text,a,b in ep['cards']:
     n=len(re.findall(r"[A-Za-z0-9#'’\"]+", text));

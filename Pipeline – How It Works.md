@@ -1,6 +1,6 @@
 # Pipeline — How It Works
 
-25 Oct 2026, updated 26 Oct 2026 (code v1.1). Folder: `05 Brand/Pipeline/` (mirrored from the build environment). **Status: Proposed.**
+25 Oct 2026, updated 27 Oct 2026 (library v2). Folder: `05 Brand/Pipeline/code/`, a mirror of the GitHub repo `sgreeff1/should-i-worry-pipeline` (Decision #50). **Status: Proposed** until library v2 is signed off.
 
 ## One episode, end to end
 
@@ -18,13 +18,17 @@
 | --- | --- |
 | `style.js` | palette, outline, fonts, motion rules — the single source of truth |
 | `core.js` | maths, keyframe engine (`ch`, `step`), 2-bone IK, drawing primitives, grain tile |
-| `rig.js` | the character: skeleton, pose solver, arm targets, two-pass drawing, expressions, outfits |
+| `rig.js` | the character: skeleton, pose solver, arm targets, two-pass drawing, expressions; `CAST` — the five members (lead, woman, older, child, doctor) |
 | `library.js` | `POSES` (14 named poses), `poseAnim()` (sequence → animation), `staticPose()`, walk cycle |
 | `icons.js` | 26 house icons, each in a 100 px box: `drawIcon(ctx,name,x,y,size,t,color)`; organ helpers (faces, halo, fluid level) — for organs `color` is a state, not a paint |
+| `meter.js` | the worry meter (gauge / bar), the meter track, the two opening idents, the wordmark |
+| `soundmark.py` | synthesises the sound mark (`audio/soundmark_a.wav`, `_b.wav`) — no stock audio |
+| `spec.py` | writes knowledge file 7 (Animation System Spec) from the code; `check` mode fails on drift |
+| `cast_sheet.py`, `contact_sheet.py`, `strips.py` | review sheets: the cast, the whole library, frame strips of chosen shots for QA |
 | `globe.js` + `world.js` | the real Earth for GLOBE shots: orthographic projection, Natural Earth 1:110m land (public domain), city markers |
 | `vendor/` | d3-geo and d3-array (ISC) — the only third-party code in the renderer |
 | `data/` + `build_world.py` | the source TopoJSON and the script that regenerates `world.js` from it |
-| `env/*.js` | home, bedroom, clinic, void, body — each `draw<Env>(ctx,t,pose,cam)` |
+| `env/*.js` | home, bedroom, clinic, hospital, street, workplace, void, body — each `draw<Env>(ctx,t,pose,cam)` |
 | `camera.js` | shot-list camera: cuts, eased moves, tracking, shake; `layer()` for parallax |
 | `finish.js` | character lighting, grade, grain, vignette, disclaimer, tag |
 | `anims/hook.js` | the E01 hook performance (keyframes + its six camera shots) |
@@ -38,9 +42,13 @@
 ## Adding things
 
 - **A new shot** → one JSON object. If its kind exists, no code.
+- **A new cast member** → one row in `CAST` (colours, hair, glasses, scale).
 - **A new pose** → one line in `POSES`. **A new expression** → one branch in `drawHead`. **A new icon** → one function in `ICON`. **A new organ** → one body path + the organ helpers (it gets a face automatically). **A new environment** → one file in `env/`.
 - **A new kind of shot** → one function in `TEMPLATES`. Cap: ten kinds; argue before adding an eleventh.
 - **A brand change** → `style.js` only. Everything downstream follows.
+
+## Versioning (Decision #50)
+Commit every library change in the session that makes it; stamp the episode JSON with `library`; run `python3 spec.py check "07 Animation System Spec.md"` and `checks.py` before hand-over; refresh `05 Brand/Pipeline/code` from the repo.
 
 ## Determinism
 All randomness is seeded (`rnd(i)`), so the same JSON renders the same frames every time. Grain is seeded per frame.
@@ -49,4 +57,5 @@ All randomness is seeded (`rnd(i)`), so the same JSON renders the same frames ev
 - Hand-drawn warmth has a ceiling in code; a commissioned layered-SVG character would drop straight onto this rig.
 - The lie pose needs its blanket; "think" lands at the mouth; "wave" is a raised hand. Tune per shot.
 - `fetch` of the episode JSON over `file://` is not allowed by the browser, so `render.py` injects it (`EP=` env var).
-- Renders run in a cloud container; the Mac needs the desktop app open to receive files.
+- Renders run in a cloud container; the Mac needs the desktop app open to receive files. Rendering is ~0.4–0.7 s per frame (a 7-minute episode is roughly 1.5–2 hours).
+- Props do not scale with the child cast member; place the child where the prop fits.
