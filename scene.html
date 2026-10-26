@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="style.js"></script><script src="core.js"></script><script src="rig.js"></script>
+<script src="env/home.js"></script><script src="camera.js"></script><script src="finish.js"></script>
+<script src="anims/hook.js"></script>
+<script>
+const C=document.getElementById('c'), X=C.getContext('2d');
+const OC=document.createElement('canvas'); OC.width=W; OC.height=H; const OX=OC.getContext('2d');
+const CC=document.createElement('canvas'); CC.width=W; CC.height=H; const CX=CC.getContext('2d');
+window.ready = Promise.all([document.fonts.load('700 22px Inter'), document.fonts.load('500 24px Inter')]);
+let ANIM=HOOK; homeSetup(ANIM);
+function drawFrame(ctx,t){
+  ctx.setTransform(1,0,0,1,0,0); ctx.globalAlpha=1; ctx.imageSmoothingQuality='high';
+  const p=pose(ANIM,t), cam=camera(ANIM,t);
+  ctx.fillStyle=P.navyD; ctx.fillRect(0,0,W,H);
+  drawHome(ctx,t,p,cam);
+  CX.setTransform(1,0,0,1,0,0); CX.clearRect(0,0,W,H);
+  CX.save(); CX.translate(cam.sx,cam.sy); CX.scale(cam.z,cam.z); CX.translate(-cam.wx,-cam.wy); drawCharacter(CX,t,p); CX.restore();
+  lightCharacter(CX); ctx.drawImage(CC,0,0);
+  grade(ctx,t); vignette(ctx); disclaimer(ctx,t); tag(ctx,'PIPELINE — E01 hook from modules · no AI assets');
+}
+window.draw=function(t){ drawFrame(X,t); };
+window.drawBlur=function(t,n,fps){ const shutter=0.5/fps; X.setTransform(1,0,0,1,0,0); X.clearRect(0,0,W,H);
+  for(let i=0;i<n;i++){ const ti=t-shutter/2+shutter*(i+0.5)/n; drawFrame(OX,Math.max(0,ti)); X.globalAlpha=1/(i+1); X.drawImage(OC,0,0); } X.globalAlpha=1; };
+</script></body></html>

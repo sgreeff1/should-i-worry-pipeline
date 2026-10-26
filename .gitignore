@@ -1,0 +1,6 @@
+out/
+check/
+__pycache__/
+*.mp4
+*.mp3
+*.m4a
