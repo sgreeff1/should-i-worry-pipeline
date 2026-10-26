@@ -1,6 +1,6 @@
 // templates.js — the ten shot kinds. Each: TEMPLATES[kind](ctx, t, spec, S) where t is seconds since the shot started,
 // spec is the shot's JSON, and S has {dur, cam, char(drawFn) → draws onto the lit character layer}.
-const ENVS = { home:(ctx,t,p,cam)=>drawHome(ctx,t,p,cam), bedroom:drawBedroom, clinic:drawClinic, void:(ctx,t,p,cam,o)=>drawVoid(ctx,t,p,cam,o||{}) };
+const ENVS = { home:(ctx,t,p,cam)=>drawHome(ctx,t,p,cam), bedroom:drawBedroom, clinic:drawClinic, hospital:drawHospital, street:drawStreet, workplace:drawWorkplace, void:(ctx,t,p,cam,o)=>drawVoid(ctx,t,p,cam,o||{}) };
 function pushCam(t,dur,z0=1.0,z1=1+MOTION.pushIn,fx=W/2,fy=H/2){ const k=EASE.io(clamp(t/dur)); return {z:lerp(z0,z1,k),wx:fx,wy:fy,sx:fx,sy:fy,drift:-10+20*k}; }
 function popIn(t,t0,d=0.35){ return EASE.ob(clamp((t-t0)/d)); }
 function sprite(ctx,x,y,s,color,o={}){ // small figure for COUNT
