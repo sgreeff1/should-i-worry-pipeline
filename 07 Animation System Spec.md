@@ -1,6 +1,6 @@
 # Animation System Spec
 
-Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 27 Oct 2026 (library commit `aa889dd`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
+Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 27 Oct 2026 (library commit `42b48cf`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
 
 ## How an episode uses the library
 
@@ -28,13 +28,13 @@ An episode is a JSON file (`episodes/<ep>.json`): `library` (the commit that ren
 
 ## Organs (Decisions #41–42, #47) — rose, faces, state colour drives halo/mood
 
-`bladder`, `bone`, `brain`, `disc`, `heart`, `knee`, `nerve`, `vertebra`
+`bladder`, `bone`, `brain`, `disc`, `heart`, `kidney`, `knee`, `nerve`, `vertebra`
 
 Call with no colour for the normal state, `P.red` (`'#EB5757'`) for the red-flag state. Bones are ivory, nerves yellow, organs rose; no ducts or tubes on organ icons.
 
 ## Icons (`icons.js` ICON) — `drawIcon(ctx,name,x,y,size,t,color)`; plus the organs above
 
-`toast`, `flame`, `alarm`, `bladder`, `bowel`, `legs`, `scanner`, `clock`, `calendar`, `siren`, `hospital`, `thermometer`, `flag`, `magnifier`, `question`, `check`, `sun`, `moon`, `pill`, `hand`, `document`, `earMute`, `arrowUp`, `arrowDown`, `triangle`, `person`
+`toast`, `flame`, `alarm`, `bladder`, `bowel`, `legs`, `scanner`, `clock`, `calendar`, `siren`, `hospital`, `thermometer`, `flag`, `magnifier`, `question`, `check`, `sun`, `moon`, `pill`, `hand`, `document`, `earMute`, `arrowUp`, `arrowDown`, `triangle`, `iv`, `glucose`, `bacteria`, `cough`, `syringe`, `fall`, `rings`, `horsetail`, `skin`, `stamp`, `walk`, `seventy`, `tumor`, `person`
 
 ## Environments (`env/*.js`, Decision #48) — `env:` on CHAR shots
 
@@ -45,6 +45,8 @@ Call with no colour for the normal state, `P.red` (`'#EB5757'`) for the red-flag
 `CHAR`, `FIGURE`, `COUNT`, `CHART`, `ICONS`, `ANATOMY`, `BANNER`, `CHAPTER`, `GLOBE`, `END`
 
 CHAPTER also carries the opening idents: `ident:'dial'` (option 1) or `ident:'char'` (option 2). END without a `title` shows the wordmark and the worry meter.
+
+ANATOMY programs: `spineIntro`, `discZoom`, and the generic `layers` (E01): `frames` (a crossfading Servier sequence), `layers` (placed images: `asset,x,y,h,t0,feather,glow,pulse`), `marks` (`ring`, `dot`, `line`, `label`, `blob`, `pulses`, `crack`, `icon`, `drift`, `sweep`; coordinates are fractions of the frame, or of an image with `layer:i`). Every ANATOMY shot with Servier art gets the credit from the composer's cite list (`build_<ep>.py` adds it).
 
 ## Signature devices (Decision #46)
 
