@@ -1,0 +1,614 @@
+[
+ {
+  "i": 1,
+  "start": 0.0,
+  "end": 0.98,
+  "text": "Imagine this."
+ },
+ {
+  "i": 2,
+  "start": 1.46,
+  "end": 6.03,
+  "text": "You bend down to grab a sock, and your lower back locks like a rusty hinge."
+ },
+ {
+  "i": 3,
+  "start": 6.57,
+  "end": 10.19,
+  "text": "You freeze, halfway down, negotiating with gravity."
+ },
+ {
+  "i": 4,
+  "start": 10.88,
+  "end": 12.41,
+  "text": "Usually, that's all it is."
+ },
+ {
+  "i": 5,
+  "start": 12.93,
+  "end": 20.55,
+  "text": "But for every hundred and twenty-five people who see a family doctor about back pain, about one has a serious problem in their spine."
+ },
+ {
+  "i": 6,
+  "start": 21.18,
+  "end": 24.84,
+  "text": "Back pain is the number one cause of disability on the planet."
+ },
+ {
+  "i": 7,
+  "start": 25.28,
+  "end": 26.47,
+  "text": "It's incredibly common."
+ },
+ {
+  "i": 8,
+  "start": 27.05,
+  "end": 28.12,
+  "text": "And that's the problem."
+ },
+ {
+  "i": 9,
+  "start": 28.64,
+  "end": 31.29,
+  "text": "When something is this common, we stop listening."
+ },
+ {
+  "i": 10,
+  "start": 31.98,
+  "end": 36.21,
+  "text": "A few rare causes can leave you unable to walk, or control your bladder."
+ },
+ {
+  "i": 11,
+  "start": 36.75,
+  "end": 38.23,
+  "text": "A few can kill you."
+ },
+ {
+  "i": 12,
+  "start": 38.8,
+  "end": 43.09,
+  "text": "And they're often missed at first, because they start out looking like ordinary back pain."
+ },
+ {
+  "i": 13,
+  "start": 43.75,
+  "end": 48.3,
+  "text": "So, which back pain is dangerous, and which only feels dangerous?"
+ },
+ {
+  "i": 14,
+  "start": 48.91,
+  "end": 52.32,
+  "text": "By the end, you'll know the signs that mean \"go now."
+ },
+ {
+  "i": 15,
+  "start": 52.88,
+  "end": 54.44,
+  "text": "First, what's normal."
+ },
+ {
+  "i": 16,
+  "start": 55.06,
+  "end": 57.93,
+  "text": "Your spine is a stack of bones called vertebrae."
+ },
+ {
+  "i": 17,
+  "start": 58.42,
+  "end": 63.7,
+  "text": "Between them sit discs: rubbery cushions with a tough outer ring and a softer center."
+ },
+ {
+  "i": 18,
+  "start": 64.24,
+  "end": 71.0,
+  "text": "Inside the spine runs the spinal cord, the thick cable of nerves carrying messages between your brain and your body."
+ },
+ {
+  "i": 19,
+  "start": 71.53,
+  "end": 74.3,
+  "text": "In adults, it ends around the top of the lower back."
+ },
+ {
+  "i": 20,
+  "start": 74.82,
+  "end": 79.2,
+  "text": "Below that, the nerves carry on as a loose bundle called the cauda equina."
+ },
+ {
+  "i": 21,
+  "start": 79.61,
+  "end": 81.27,
+  "text": "That's Latin for \"horse's tail."
+ },
+ {
+  "i": 22,
+  "start": 81.85,
+  "end": 85.81,
+  "text": "These nerves run your legs, bladder, bowel and sexual function."
+ },
+ {
+  "i": 23,
+  "start": 86.47,
+  "end": 89.01,
+  "text": "Now, think of back pain as a smoke alarm."
+ },
+ {
+  "i": 24,
+  "start": 89.52,
+  "end": 91.69,
+  "text": "Your back is very good at sounding it."
+ },
+ {
+  "i": 25,
+  "start": 92.18,
+  "end": 96.68,
+  "text": "Most of the time, it's burnt toast: a lot of noise, but no real danger."
+ },
+ {
+  "i": 26,
+  "start": 97.11,
+  "end": 99.76,
+  "text": "Loud, miserable, and usually harmless."
+ },
+ {
+  "i": 27,
+  "start": 100.3,
+  "end": 104.86,
+  "text": "For nearly everyone with back pain, doctors can't point to one specific cause."
+ },
+ {
+  "i": 28,
+  "start": 105.28,
+  "end": 108.67,
+  "text": "And on average, people improve a lot within about six weeks."
+ },
+ {
+  "i": 29,
+  "start": 109.17,
+  "end": 112.35,
+  "text": "But every so often, the alarm means a real fire."
+ },
+ {
+  "i": 30,
+  "start": 112.83,
+  "end": 113.71,
+  "text": "Let's walk through them."
+ },
+ {
+  "i": 31,
+  "start": 114.34,
+  "end": 117.46,
+  "text": "Fire number one: a squeezed horse's tail."
+ },
+ {
+  "i": 32,
+  "start": 118.14,
+  "end": 120.48,
+  "text": "Imagine your back has grumbled for a week."
+ },
+ {
+  "i": 33,
+  "start": 120.89,
+  "end": 123.35,
+  "text": "Then pain shoots down both legs."
+ },
+ {
+  "i": 34,
+  "start": 123.81,
+  "end": 128.53,
+  "text": "Wiping after the toilet feels strange, numb, like it's someone else's skin."
+ },
+ {
+  "i": 35,
+  "start": 129.01,
+  "end": 132.09,
+  "text": "And you realize you haven't needed to pee all afternoon."
+ },
+ {
+  "i": 36,
+  "start": 132.61,
+  "end": 134.58,
+  "text": "That's cauda equina syndrome."
+ },
+ {
+  "i": 37,
+  "start": 135.08,
+  "end": 140.06,
+  "text": "Something, often part of a disc pushing backward, is squeezing that bundle of nerves."
+ },
+ {
+  "i": 38,
+  "start": 140.49,
+  "end": 146.85,
+  "text": "And because those same nerves carry the signals for your bladder and the skin you sit on, those are the parts that go quiet."
+ },
+ {
+  "i": 39,
+  "start": 147.41,
+  "end": 148.0,
+  "text": "It's rare."
+ },
+ {
+  "i": 40,
+  "start": 148.44,
+  "end": 152.73,
+  "text": "Estimates range from about one to three in a hundred thousand people a year."
+ },
+ {
+  "i": 41,
+  "start": 153.16,
+  "end": 157.53,
+  "text": "But it can permanently affect your bladder, bowel, legs and sex life."
+ },
+ {
+  "i": 42,
+  "start": 158.03,
+  "end": 160.01,
+  "text": "Doctors treat it as an emergency."
+ },
+ {
+  "i": 43,
+  "start": 160.56,
+  "end": 166.22,
+  "text": "In the UK, the standard is a scan within four hours of the request."
+ },
+ {
+  "i": 44,
+  "start": 166.73,
+  "end": 171.43,
+  "text": "Fire number two: an infection right next to the nerves, called a spinal epidural abscess."
+ },
+ {
+  "i": 45,
+  "start": 172.06,
+  "end": 176.94,
+  "text": "In this story, you might have had a skin infection, a drip in your arm, or diabetes."
+ },
+ {
+  "i": 46,
+  "start": 177.52,
+  "end": 180.11,
+  "text": "Then comes back pain, and maybe a fever."
+ },
+ {
+  "i": 47,
+  "start": 180.76,
+  "end": 186.23,
+  "text": "Bacteria have settled in the space around your nerves, and a pocket of pus slowly builds up."
+ },
+ {
+  "i": 48,
+  "start": 186.81,
+  "end": 190.35,
+  "text": "At first, the alarm sounds exactly like burnt toast."
+ },
+ {
+  "i": 49,
+  "start": 190.98,
+  "end": 191.7,
+  "text": "Here's the catch."
+ },
+ {
+  "i": 50,
+  "start": 192.26,
+  "end": 198.11,
+  "text": "In one study, the textbook trio showed up at the first visit in only about one in eight patients."
+ },
+ {
+  "i": 51,
+  "start": 198.66,
+  "end": 201.99,
+  "text": "That's back pain, fever and nerve problems together."
+ },
+ {
+  "i": 52,
+  "start": 202.6,
+  "end": 206.42,
+  "text": "In that same study, three in four had a delayed diagnosis."
+ },
+ {
+  "i": 53,
+  "start": 206.92,
+  "end": 211.48,
+  "text": "And across many studies, about one in ten people with this infection died."
+ },
+ {
+  "i": 54,
+  "start": 212.17,
+  "end": 215.06,
+  "text": "Fire number three: cancer in the spine."
+ },
+ {
+  "i": 55,
+  "start": 215.71,
+  "end": 220.53,
+  "text": "If you've ever had cancer, new back pain deserves a doctor's look the same day."
+ },
+ {
+  "i": 56,
+  "start": 221.13,
+  "end": 225.45,
+  "text": "A past history of cancer is one of the few single clues that really helps."
+ },
+ {
+  "i": 57,
+  "start": 226.01,
+  "end": 232.13,
+  "text": "Pain that keeps getting worse, wakes you at night, or flares when you cough or strain makes it more worrying."
+ },
+ {
+  "i": 58,
+  "start": 232.74,
+  "end": 237.64,
+  "text": "If the cancer presses on the spinal cord, legs can weaken and walking gets harder."
+ },
+ {
+  "i": 59,
+  "start": 238.05,
+  "end": 239.41,
+  "text": "That's an emergency."
+ },
+ {
+  "i": 60,
+  "start": 240.17,
+  "end": 242.64,
+  "text": "Fire number four: a broken bone."
+ },
+ {
+  "i": 61,
+  "start": 243.3,
+  "end": 250.32,
+  "text": "If you're over seventy, have taken steroid medicines for a long time, or had a real fall, a vertebra may crack."
+ },
+ {
+  "i": 62,
+  "start": 250.88,
+  "end": 254.23,
+  "text": "When bones are weak, it can take surprisingly little force."
+ },
+ {
+  "i": 63,
+  "start": 254.82,
+  "end": 255.83,
+  "text": "Now the twist."
+ },
+ {
+  "i": 64,
+  "start": 256.37,
+  "end": 260.23,
+  "text": "One emergency department study looked at a thousand people with back pain."
+ },
+ {
+  "i": 65,
+  "start": 260.78,
+  "end": 266.08,
+  "text": "Serious causes outside the spine turned up more often than serious causes inside it."
+ },
+ {
+  "i": 66,
+  "start": 266.63,
+  "end": 270.89,
+  "text": "Sometimes the alarm rings in your back, but the fire is somewhere else."
+ },
+ {
+  "i": 67,
+  "start": 271.44,
+  "end": 277.09,
+  "text": "The most dangerous is the aorta, your body's main artery, which runs right in front of your spine."
+ },
+ {
+  "i": 68,
+  "start": 277.7,
+  "end": 280.44,
+  "text": "If it bursts or tears, it's life-threatening."
+ },
+ {
+  "i": 69,
+  "start": 281.04,
+  "end": 288.05,
+  "text": "A burst aneurysm, a ballooned section of the aorta, is first mistaken for something else in about one in three cases."
+ },
+ {
+  "i": 70,
+  "start": 288.55,
+  "end": 292.62,
+  "text": "So, calmly, here are the signs that mean your alarm needs checking."
+ },
+ {
+  "i": 71,
+  "start": 293.08,
+  "end": 294.24,
+  "text": "You don't need all of them."
+ },
+ {
+  "i": 72,
+  "start": 294.55,
+  "end": 295.63,
+  "text": "One is enough."
+ },
+ {
+  "i": 73,
+  "start": 296.21,
+  "end": 304.49,
+  "text": "Go to an emergency department now if back pain comes with any of these: new trouble peeing, or not feeling when your bladder is full."
+ },
+ {
+  "i": 74,
+  "start": 305.13,
+  "end": 311.21,
+  "text": "Numbness in the \"saddle\" area: between your legs, around your bottom, your genitals or your inner thighs."
+ },
+ {
+  "i": 75,
+  "start": 311.76,
+  "end": 313.48,
+  "text": "Losing control of your bowels."
+ },
+ {
+  "i": 76,
+  "start": 314.0,
+  "end": 315.94,
+  "text": "A new change in sexual function."
+ },
+ {
+  "i": 77,
+  "start": 316.49,
+  "end": 319.72,
+  "text": "Or weakness or numbness in your legs that's getting worse."
+ },
+ {
+  "i": 78,
+  "start": 320.3,
+  "end": 325.8,
+  "text": "Go now, too, with sudden, severe pain in your back or belly, especially if you feel faint."
+ },
+ {
+  "i": 79,
+  "start": 326.32,
+  "end": 331.14,
+  "text": "And if you've had cancer, new leg weakness or trouble walking means go now."
+ },
+ {
+  "i": 80,
+  "start": 331.6,
+  "end": 337.05,
+  "text": "See a doctor the same day if your back pain comes with a fever, or you feel generally unwell."
+ },
+ {
+  "i": 81,
+  "start": 337.5,
+  "end": 343.73,
+  "text": "That matters most after a recent infection, a drip or line in a vein, or if you inject drugs."
+ },
+ {
+  "i": 82,
+  "start": 344.1,
+  "end": 348.4,
+  "text": "Same day, too, if you've had cancer and get new or worsening back pain."
+ },
+ {
+  "i": 83,
+  "start": 348.88,
+  "end": 354.65,
+  "text": "See a doctor soon for pain after a fall if you're over seventy, or take long-term steroids."
+ },
+ {
+  "i": 84,
+  "start": 355.07,
+  "end": 359.64,
+  "text": "And pain in your side with a fever, or pain when you pee, may be your kidneys."
+ },
+ {
+  "i": 85,
+  "start": 360.07,
+  "end": 361.68,
+  "text": "Get that checked the same day."
+ },
+ {
+  "i": 86,
+  "start": 362.4,
+  "end": 363.9,
+  "text": "A few honest limits."
+ },
+ {
+  "i": 87,
+  "start": 364.36,
+  "end": 366.97,
+  "text": "No single warning sign proves anything."
+ },
+ {
+  "i": 88,
+  "start": 367.46,
+  "end": 372.85,
+  "text": "In one study, eight in ten people with back pain had at least one so-called red flag."
+ },
+ {
+  "i": 89,
+  "start": 373.21,
+  "end": 376.09,
+  "text": "Fewer than one in a hundred had something serious."
+ },
+ {
+  "i": 90,
+  "start": 376.55,
+  "end": 379.06,
+  "text": "Most warning signs come from small studies."
+ },
+ {
+  "i": 91,
+  "start": 379.44,
+  "end": 382.87,
+  "text": "The go-now signs are the ones emergency guidelines name."
+ },
+ {
+  "i": 92,
+  "start": 383.49,
+  "end": 385.29,
+  "text": "Scans aren't magic either."
+ },
+ {
+  "i": 93,
+  "start": 385.65,
+  "end": 392.44,
+  "text": "Disc bulges show up in about three in ten pain-free twenty-year-olds, and more than eight in ten by age eighty."
+ },
+ {
+  "i": 94,
+  "start": 392.87,
+  "end": 395.72,
+  "text": "Even a herniated disc often shrinks on its own."
+ },
+ {
+  "i": 95,
+  "start": 396.12,
+  "end": 398.42,
+  "text": "That's why most people don't need a scan."
+ },
+ {
+  "i": 96,
+  "start": 398.95,
+  "end": 402.48,
+  "text": "If you're worried, or your pain isn't settling, see your doctor."
+ },
+ {
+  "i": 97,
+  "start": 402.94,
+  "end": 404.58,
+  "text": "So, back to that sock."
+ },
+ {
+  "i": 98,
+  "start": 405.0,
+  "end": 407.04,
+  "text": "Most back pain is burnt toast."
+ },
+ {
+  "i": 99,
+  "start": 407.46,
+  "end": 414.15,
+  "text": "But bladder or bowel trouble, a numb saddle, weakening legs, or sudden severe pain mean go now."
+ },
+ {
+  "i": 100,
+  "start": 414.53,
+  "end": 418.06,
+  "text": "Fever, or new back pain after cancer, means today."
+ },
+ {
+  "i": 101,
+  "start": 418.51,
+  "end": 422.29,
+  "text": "This video is general education, not medical advice for you."
+ },
+ {
+  "i": 102,
+  "start": 422.74,
+  "end": 424.5,
+  "text": "Look after your back."
+ }
+]
