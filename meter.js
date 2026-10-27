@@ -32,7 +32,7 @@ function drawMeter(ctx,t,o={}){
 // A meter track in the episode JSON: ep.meter = [{t0, t1, from, to, ease?, size?, x?, y?, style?}] — the value animates from→to over the window; between windows the last value holds.
 function meterValue(track,t){ let v=null; for(const m of track){ if(t>=m.t0){ const k=clamp((t-m.t0)/Math.max(0.01,(m.t1-m.t0))); v=lerp(m.from??(v??0), m.to, EASE[m.ease||'swing'](k)); } } return v; }
 function drawMeterTrack(ctx,t,track){ if(!track||!track.length) return; const cur=[...track].reverse().find(m=>t>=m.t0); if(!cur) return; const hold=cur.hold??4; const al=Math.min(clamp((t-cur.t0)/0.4), clamp((cur.t1+hold-t)/0.4)); if(al<=0) return;
-  const sz=cur.size??300; drawMeter(ctx,t,{x:cur.x??W*0.86,y:cur.y??H*0.70,size:sz,value:meterValue(track,t),style:cur.style||METER_STYLE,label:cur.label??(sz<320?false:undefined),alpha:al}); }   // corner overlays carry no label
+  const sz=cur.size??300; drawMeter(ctx,t,{x:cur.x??W*0.86,y:cur.y??H*0.82,size:sz,value:meterValue(track,t),style:cur.style||METER_STYLE,label:cur.label??(sz<320?false:undefined),alpha:al}); }   // corner overlays carry no label
 let METER_STYLE='gauge';
 
 // ---- the wordmark and the opening ident (two options) ----

@@ -1,6 +1,6 @@
 # Animation System Spec
 
-Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 26 Oct 2026 (library commit `cb4c1ef`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
+Knowledge-base file 7 of 7. **Generated from the code by `spec.py`** on 27 Oct 2026 (library commit `aa889dd`, repo `sgreeff1/should-i-worry-pipeline`). Regenerate after any library change; `python3 spec.py check` fails if this file and the code disagree. Rules of use are in the Pipeline – Style Bible; this file is the inventory. New chats build from this inventory and never re-invent an item on it.
 
 ## How an episode uses the library
 

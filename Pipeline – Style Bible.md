@@ -45,10 +45,10 @@ Colour is never the only cue: urgency tiers, the worry meter and organ states al
 - Motion blur: 4 sub-frames over a 180° shutter, on every render.
 
 ## Type and layout (Decision #49)
-- Inter everywhere. Cards 800/64 px on a navy pill at 78 % opacity, ≤ 7 words. **Safe band:** on CHAR and FIGURE shots the card sits in the top band (15 % height) so it never crosses a standing figure; on every other template at 80 % height. `cardLow:true` on a shot overrides.
+- Inter everywhere. Cards 800/64 px on a navy pill at 78 % opacity, ≤ 7 words. **Safe band:** on CHAR and FIGURE shots the card sits in the top band (8 % height, pill clear of a raised hand by 20 px) so it never crosses a standing figure; on every other template at 80 % height. `cardLow:true` on a shot overrides.
 - Citations 600/36 px bottom-left on a 92 % navy pill (raised contrast, QA 26 Oct 2026). Tag 700/22 px top-left. Disclaimer 500/30 px bottom-right, first 10 s only.
 - Chapter cards: amber kicker 500/44 px, ivory title 800/92 px, teal rule; one style for every chapter.
-- Corner meter default position: top-right (84 % width, 20 % height), 260 px.
+- Corner meter default position: bottom-right (86 % width, 82 % height), 300 px; it never shares a baseline with a banner's icon row and stays clear of the citation pill (bottom-left).
 
 ## Motion rules (`MOTION`)
 - 25 fps, 1920×1080. Crossfade 0.35 s between template shots; **hard cuts** inside character scenes and into FIGURE shots that follow a crowd (`cut:true`).
