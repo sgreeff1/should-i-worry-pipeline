@@ -1,7 +1,7 @@
 {
  "title": "E01 \u2014 The Back Pain That Can Kill You",
- "tag": "Should I Worry? \u00b7 doctor-reviewed, AI-produced",
- "library": "9364439",
+ "tag": "Doctor-reviewed \u00b7 every claim referenced",
+ "library": "1b13feb",
  "duration": 432.9,
  "voOffset": 2.4,
  "assets": {
@@ -2374,8 +2374,8 @@
   {
    "id": 86,
    "lines": [
-    "Reviewed by Dr Greeff, Neurosurgery registrar",
-    "General education, not medical advice for you"
+    "Fact-checked by doctors",
+    "Every claim referenced. For educational purposes only."
    ],
    "meterValue": 0.45,
    "cta": "Subscribe for the next one",

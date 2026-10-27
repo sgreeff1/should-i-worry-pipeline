@@ -210,7 +210,7 @@ shot(T(99),'BANNER',id=84,tier='GO NOW',items=[{'icon':'bladder','label':'Bladde
 shot(T(100),'BANNER',id=85,cut=True,tier='SAME DAY',items=[{'icon':'thermometer','label':'Fever'},{'icon':'document','label':'New pain after cancer'}]); card('SAME DAY: fever; new pain after cancer',T(100)+0.4,E(100))
 # ---- R86 (S101–102) look after your back, then the end card ----
 shot(T(101),'CHAR',id='85b',env='home',outfit='lead',seq=[[0,'stand'],[0.8,'wave',0.5],[3.2,'stand',0.5]],face=[[0,'calm'],[0.6,'happy']],opts={'standX':1920*0.42,'floor':1080*0.84}); card('Look after your back',T(102),E(102)+0.6)
-shot(E(102)+0.4,'END',id=86,lines=['Reviewed by Dr Greeff, Neurosurgery registrar','General education, not medical advice for you'],meterValue=0.45,cta='Subscribe for the next one')
+shot(E(102)+0.4,'END',id=86,lines=['Fact-checked by doctors','Every claim referenced. For educational purposes only.'],meterValue=0.45,cta='Subscribe for the next one')   # anonymous credit, Sebastian 27 Oct 2026 (Decision #55)
 DUR=round(E(102)+6.0,2)
 # close every shot at the next shot's start
 for a,b in zip(shots,shots[1:]): a['t1']=b['t0']
@@ -228,7 +228,7 @@ meter=[{'t0':T(10),'t1':T(11)+0.5,'from':0.45,'to':0.92,'hold':3},{'t0':T(24),'t
        {'t0':T(29),'t1':T(30),'from':0.32,'to':0.95,'hold':1.0},{'t0':T(70),'t1':T(71),'from':0.95,'to':0.5,'hold':2},
        {'t0':T(97)+1.0,'t1':T(98),'from':0.5,'to':0.32,'hold':round(T(99)-T(98)-0.4,2)}]
 lib=subprocess.run(['git','-C','/home/claude/should-i-worry-pipeline','rev-parse','--short','HEAD'],capture_output=True,text=True).stdout.strip()
-ep={'title':'E01 — The Back Pain That Can Kill You','tag':'Should I Worry? · doctor-reviewed, AI-produced','library':lib,'duration':DUR,'voOffset':OFF,
+ep={'title':'E01 — The Back Pain That Can Kill You','tag':'Doctor-reviewed · every claim referenced','library':lib,'duration':DUR,'voOffset':OFF,
     'assets':{'spine':'assets/A_Espace_epidural.png','body':'assets/A_Colonne_normale2.png','vert':'assets/A_vertebre_06.png','mask_disc':'assets/mask_disc.png',
               'nervous':'assets/servier/Systeme_nerveux.png','spineFront':'assets/servier/colonne_02.png','epidural':'assets/A_Espace_epidural.png',
               'hern1':'assets/servier/Hernie_discale1.png','hern2':'assets/servier/Hernie_discale2.png','hern3':'assets/servier/Hernie_discale3.png','hern4':'assets/servier/Hernie_discale4.png',
