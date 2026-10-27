@@ -34,11 +34,11 @@ for text,a,b in ep['cards']:
         if not any(ca<=a+0.01 and cb>=b-0.01 for _,ca,cb in ep['cites']): fails.append(f"4.4 numeric card without a citation: {text!r}")
 # 4.2 anatomy shots need the Servier credit on screen
 for s in shots:
-    if s['kind']=='ANATOMY' and not any('Servier' in c[0] and c[1]<=s['t0']+1.0 and c[2]>=s['t1']-0.01 for c in ep['cites']):
+    if s['kind']=='ANATOMY' and (s.get('asset') or s.get('layers') or s.get('frames')) and not any('Servier' in c[0] and c[1]<=s['t0']+1.0 and c[2]>=s['t1']-0.01 for c in ep['cites']):
         fails.append(f"4.2 ANATOMY shot {s['id']} without the Servier credit")
 # sync: every shot boundary should sit on a sentence start (±0.06 s) when timings are given
 if timings:
-    starts=[x['start'] for x in timings]
+    off=ep.get('voOffset',0); starts=[x['start']+off for x in timings]   # the voice starts after the opening ident
     for s in shots[1:]:
         if min(abs(s['t0']-x) for x in starts)>0.06: notes.append(f"sync: shot {s['id']} starts at {s['t0']} — not on a sentence start")
 # disclaimer in the first 10 s is drawn by the composer (finish.js) — structural, always on

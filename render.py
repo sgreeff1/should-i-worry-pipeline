@@ -14,17 +14,17 @@ def stills(times,outdir,page="scene.html",mode=None):
         for t in times:
             pg.evaluate(f"draw({t}{','+repr(mode) if mode else ''})"); pg.locator("#c").screenshot(path=f"{outdir}/f_{t:06.2f}.png")
         print("ERRS",errs[:5]); b.close()
-def video(out,dur,fps=25,blur=4,page="scene.html"):
+def video(out,dur,fps=25,blur=4,page="scene.html",start=0.0):   # START=<s> renders a chunk from that time (join chunks with ffmpeg concat)
     with sync_playwright() as p:
         b,pg,errs=open_page(p,page); n=int(round(dur*fps))
         ff=subprocess.Popen(["ffmpeg","-y","-loglevel","error","-f","image2pipe","-framerate",str(fps),"-i","-","-c:v","libx264","-preset","veryfast","-crf","18","-pix_fmt","yuv420p",out],stdin=subprocess.PIPE)
         t0=time.time()
         for i in range(n):
-            t=i/fps
+            t=start+i/fps
             pg.evaluate(f"drawBlur({t:.5f},{blur},{fps})" if blur else f"draw({t:.5f})")
             ff.stdin.write(pg.locator("#c").screenshot(type="jpeg",quality=95))
             if i%100==0: print(i,n,f"{time.time()-t0:.0f}s",flush=True)
         ff.stdin.close(); ff.wait(); b.close(); print("ERRS",errs[:5])
 if __name__=="__main__":
     if sys.argv[1]=="stills": stills([float(x) for x in sys.argv[3:]], sys.argv[2], page=os.environ.get("PAGE","scene.html"))
-    elif sys.argv[1]=="video": video(sys.argv[2], float(sys.argv[3]), blur=int(sys.argv[4]) if len(sys.argv)>4 else 4, page=os.environ.get("PAGE","scene.html"))
+    elif sys.argv[1]=="video": video(sys.argv[2], float(sys.argv[3]), blur=int(sys.argv[4]) if len(sys.argv)>4 else 4, page=os.environ.get("PAGE","scene.html"), start=float(os.environ.get("START","0")))
