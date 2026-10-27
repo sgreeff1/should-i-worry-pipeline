@@ -39,6 +39,10 @@ while i<nTotal:
     v=v*env
     sub=np.sin(2*np.pi*(f[0]/2)*np.arange(n)/SR)*env*0.28   # sub an octave below the root
     b=np.zeros(n); bn=min(int(3.0*SR),n); b[:bn]=bell(f[0]*4,bn)*0.07
+    # the pulse: a soft rounded tick on the root every 2 s, felt more than heard
+    pt=np.arange(int(0.35*SR))/SR; tick=np.sin(2*np.pi*f[0]*2*pt)*np.exp(-pt*14)*(1-np.exp(-pt*400))
+    for k in range(0, n, int(2.0*SR)):
+        m=min(len(tick), n-k); b[k:k+m]+=tick[:m]*0.10*env[k]
     # a touch of stereo: the pad leans, the sub and bell stay centred
     lean=0.5+0.12*np.sin(2*np.pi*0.02*np.arange(n)/SR+c)
     L[i:i+n]+=v*(1-lean)+sub*0.5+b*0.5; R[i:i+n]+=v*lean+sub*0.5+b*0.5
@@ -49,7 +53,7 @@ breath=0.86+0.14*np.sin(2*np.pi*t/23.0)                     # a slow swell, far 
 fade=np.ones(nTotal); fi=int(2.0*SR); fo=int(2.5*SR)        # 2 s in, 2.5 s out (Style Bible)
 fade[:fi]=np.linspace(0,1,fi); fade[-fo:]=np.linspace(1,0,fo)
 mix=np.stack([L*breath*fade, R*breath*fade],1)
-mix/=max(1e-9,np.max(np.abs(mix))); mix*=0.126              # peak about -18 dBFS; the mix ducks it further
+mix/=max(1e-9,np.max(np.abs(mix))); mix*=0.089              # peak about -21 dBFS (3 dB lower than v1: 'slightly too present'); the mix ducks it further
 os.makedirs(os.path.dirname(OUT) or '.',exist_ok=True)
 with wave.open(OUT,'wb') as w: w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix*32767).astype('<i2').tobytes())
 print(OUT, f'{DUR:.1f}s')
