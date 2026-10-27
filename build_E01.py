@@ -35,7 +35,7 @@ shot(T(6),'GLOBE',id=6); card('#1 cause of disability worldwide',T(6)+0.4,E(6));
 # ---- R7 (S7–9) crowd ----
 shot(T(7),'FIGURE',id=7,count=5,gap=330,pose='backPain',faces=['worried','tired','worried','calm','worried'],outfits=['lead','woman','older','woman','lead'],
      overlays=[{'region':'back','color':AMBER,'t0':0.4+0.2*i,'fig':i,'pulse':True} for i in range(5)],
-     icons=[{'icon':'earMute','fig':2,'dx':0,'dy':-260,'t0':T(9)-T(7),'size':130}])
+     icons=[{'icon':'earMute','fig':2,'dx':165,'dy':-40,'t0':T(9)-T(7),'size':110}])
 card('So common, we stop listening',T(9),E(9))
 # ---- R8 (S10–11) ----
 shot(T(10),'FIGURE',id=8,count=1,pose='stand',face='worried',overlays=[{'region':'legs','color':RED,'t0':1.0,'pulse':True},{'region':'saddle','color':RED,'t0':2.4,'pulse':True}],
@@ -51,21 +51,21 @@ shot(T(14),'ICONS',id=11,layout='single',size=320,items=[{'icon':'alarm','t0':0.
 shot(T(15),'ANATOMY',id=12,program='spineIntro',asset='body',inset='vert'); card('Vertebrae: the stacked bones',T(16),E(16))
 shot(T(17),'ANATOMY',id=13,program='discZoom',asset='spine',pointer=[280,931],label='Disc'); card('Disc: tough ring, soft center',T(17)+0.4,E(17))
 # ---- R14 (S18) cord pulses ----
-shot(T(18),'ANATOMY',id=14,program='layers',layers=[{'asset':'nervous','x':0.30,'y':0.5,'h':0.92,'feather':40}],
+shot(T(18),'ANATOMY',id=14,program='layers',layers=[{'asset':'nervous','x':0.30,'y':0.5,'h':0.84}],
      marks=[{'type':'pulses','layer':0,'x':0.50,'y':0.12,'x2':0.50,'y2':0.40,'t0':0.6,'n':3,'period':1.4,'color':'#F2C94C','r':10},
             {'type':'pulses','layer':0,'x':0.50,'y':0.40,'x2':0.50,'y2':0.12,'t0':1.3,'n':3,'period':1.4,'color':'#FFF3B0','r':8},
             {'type':'label','x':0.52,'y':0.30,'text':'Spinal cord','t0':0.8,'size':54},{'type':'label','x':0.52,'y':0.36,'text':'the thick cable of nerves','t0':1.0,'size':34,'weight':500,'color':'#CFC6B2'},{'type':'line','layer':0,'x':0.52,'y':0.26,'x2':1.55,'y2':0.28,'t0':0.8,'alpha':0.7}])
 card('Spinal cord: the nerve cable',T(18)+0.5,E(18))
 # ---- R15 (S19) cord ends ----
-shot(T(19),'ANATOMY',id=15,program='layers',layers=[{'asset':'spineFront','x':0.30,'y':0.5,'h':0.9}],
+shot(T(19),'ANATOMY',id=15,program='layers',layers=[{'asset':'spineFront','x':0.24,'y':0.5,'h':0.84}],
      marks=[{'type':'ring','layer':0,'x':0.50,'y':0.60,'r':44,'t0':0.5,'color':'#F2C94C'},{'type':'line','layer':0,'x':0.62,'y':0.60,'x2':1.9,'y2':0.52,'t0':0.9,'alpha':0.7},
             {'type':'label','x':0.48,'y':0.49,'text':'Cord ends about here','t0':1.0,'size':48},{'type':'label','x':0.48,'y':0.55,'text':'(top of the lower back, L1–L2)','t0':1.2,'size':34,'weight':500,'color':'#CFC6B2'}])
 card('Cord ends near top of lower back',T(19)+0.5,E(19))
 # ---- R16 (S20) cauda equina fans down ----
-shot(T(20),'ANATOMY',id=16,program='layers',layers=[{'asset':'spineFront','x':0.30,'y':0.5,'h':0.9}],
+shot(T(20),'ANATOMY',id=16,program='layers',layers=[{'asset':'spineFront','x':0.24,'y':0.5,'h':0.84}],
      marks=[{'type':'ring','layer':0,'x':0.50,'y':0.60,'r':44,'t0':0,'color':'#F2C94C'}]+
            [{'type':'pulses','layer':0,'x':0.50,'y':0.60,'x2':0.50+dx,'y2':0.96,'t0':0.4+0.1*i,'n':3,'period':1.3,'color':'#F2C94C','r':8} for i,dx in enumerate([-0.22,-0.11,0,0.11,0.22])]+
-           [{'type':'label','x':0.48,'y':0.66,'text':'Cauda equina','t0':1.4,'size':54},{'type':'label','x':0.48,'y':0.72,'text':'a loose bundle of nerves','t0':1.6,'size':34,'weight':500,'color':'#CFC6B2'}])
+           [{'type':'label','x':0.48,'y':0.58,'text':'Cauda equina','t0':1.4,'size':54},{'type':'label','x':0.48,'y':0.64,'text':'a loose bundle of nerves','t0':1.6,'size':34,'weight':500,'color':'#CFC6B2'}])
 card('Cauda equina',T(20)+1.2,E(20))
 # ---- R17 (S21–22) horse's tail + what it runs ----
 shot(T(21),'ICONS',id=17,size=170,gap=340,items=[{'icon':'horsetail','label':"Horse's tail",'t0':0.1},{'icon':'legs','label':'Legs','t0':T(22)-T(21)+0.2},{'icon':'bladder','label':'Bladder','t0':T(22)-T(21)+0.8},{'icon':'bowel','label':'Bowel','t0':T(22)-T(21)+1.3},{'icon':'rings','label':'Sexual function','t0':T(22)-T(21)+1.8}])
@@ -75,7 +75,7 @@ shot(T(23),'FIGURE',id=18,count=1,pose='backPain',face='worried',overlays=[{'reg
 card('Back pain = smoke alarm',T(23)+0.4,E(24))
 # ---- R20 (S25–26) burnt toast ----
 shot(T(25),'ICONS',id=20,layout='single',size=320,items=[{'icon':'toast','t0':0.1,'pulse':True}]); card('Usually: burnt toast',T(25)+0.5,E(25))
-shot(T(26),'FIGURE',id='20b',count=1,pose='backPain',face='ouch',overlays=[{'region':'back','color':AMBER,'t0':0.2,'pulse':True}],icons=[{'icon':'toast','at':'side','t0':0.5,'size':150,'dx':40,'dy':-120}]); card('Loud, miserable, usually harmless',T(26)+0.3,E(26))
+shot(T(26),'FIGURE',id='20b',count=1,pose='backPain',face='ouch',overlays=[{'region':'back','color':AMBER,'t0':0.2,'pulse':True}],icons=[{'icon':'toast','at':'side','t0':0.5,'size':150,'dx':40,'dy':-40}]); card('Loud, miserable, usually harmless',T(26)+0.3,E(26))
 # ---- R21 (S27) no single cause ----
 shot(T(27),'FIGURE',id=21,count=1,pose='shrug',face='thinking',icons=[{'icon':'question','dx':0,'dy':-330,'t0':0.8,'size':150}]); card('Often no single cause found',T(27)+0.4,E(27)); cite(HART,T(27)+0.4,E(27))
 # ---- R22 (S28) chart ----
@@ -84,7 +84,7 @@ shot(T(28),'CHART',id=22,type='bar',labels=['Week 0','Week 6'],values=[52,23],ma
 shot(T(29),'ICONS',id=23,layout='single',size=320,items=[{'icon':'toast','t0':0.1,'flip':1.2,'flipTo':'flame'}]); card('Sometimes: a real fire',T(29)+1.4,E(30))
 # ---- R24 (S31–32) Fire 1 ----
 shot(T(31),'CHAPTER',id=24,kicker='Fire number one',title="A squeezed horse's tail",inset='horsetail')
-shot(T(32),'FIGURE',id='24b',count=1,pose='backPain',face='tired',outfit='lead',overlays=[{'region':'back','color':AMBER,'t0':0.3,'pulse':True}],icons=[{'icon':'calendar','at':'side','t0':0.6,'size':150,'dx':60,'dy':-120}])
+shot(T(32),'FIGURE',id='24b',count=1,pose='backPain',face='worried',outfit='lead',overlays=[{'region':'back','color':AMBER,'t0':0.3,'pulse':True}],icons=[{'icon':'calendar','at':'side','t0':0.6,'size':150,'dx':60,'dy':-120}])
 card('A week of grumbling',T(32)+0.5,E(32))
 # ---- R25–27 (S33–36) ----
 shot(T(33),'FIGURE',id=25,count=1,pose='stand',face='ouch',overlays=[{'region':'legs','color':RED,'t0':0.3,'pulse':True}],cut=True); card('Pain down both legs',T(33)+0.3,E(33))
@@ -93,7 +93,7 @@ shot(T(35),'FIGURE',id=27,count=1,pose='stand',face='worried',overlays=[{'region
 card('Cauda equina syndrome',T(36),E(36))
 # ---- R28 (S37) disc pushes back ----
 shot(T(37),'ANATOMY',id=28,program='layers',frames={'assets':['hern1','hern2','hern3','hern4'],'times':[0,1.2,2.2,3.2],'fade':0.6,'x':0.28,'y':0.42,'h':0.64},
-     marks=[{'type':'icon','icon':'nerve','x':0.78,'y':0.48,'size':210,'t0':0.3,'color':RED,'text':'the bundle'},{'type':'label','x':0.56,'y':0.20,'text':'Disc, from above','t0':0.3,'size':40,'weight':500,'color':'#CFC6B2'},
+     marks=[{'type':'icon','icon':'nerve','x':0.78,'y':0.48,'size':210,'t0':0.3,'color':RED,'text':'nerve bundle'},{'type':'label','x':0.56,'y':0.20,'text':'Disc, from above','t0':0.3,'size':40,'weight':500,'color':'#CFC6B2'},
             {'type':'label','x':0.56,'y':0.27,'text':'soft center pushes backward','t0':2.0,'size':40,'weight':700}])
 card('Disc presses on nerve bundle',T(37)+0.6,E(37)); cite(GIRFT,T(37),E(37))
 # ---- R29–30 (S38) signals fade ----
@@ -117,7 +117,7 @@ shot(T(44),'CHAPTER',id=34,kicker='Fire number two',title='Infection by the nerv
 # ---- R35 (S45) ----
 shot(T(45),'ICONS',id=35,size=190,items=[{'icon':'skin','label':'Skin infection'},{'icon':'iv','label':'A drip'},{'icon':'glucose','label':'Diabetes'}]); card('Skin infection, IV drip, diabetes',T(45)+0.6,E(45)); cite(REIH,T(45)+0.6,E(45))
 # ---- R36 (S46) ----
-shot(T(46),'FIGURE',id=36,count=1,pose='backPain',face='tired',overlays=[{'region':'back','color':AMBER,'t0':0.3,'pulse':True}],icons=[{'icon':'thermometer','at':'side','t0':1.0,'size':160,'dx':40,'dy':-120}]); card('Back pain, maybe fever',T(46)+0.4,E(46))
+shot(T(46),'FIGURE',id=36,count=1,pose='backPain',face='worried',overlays=[{'region':'back','color':AMBER,'t0':0.3,'pulse':True}],icons=[{'icon':'thermometer','at':'side','t0':1.0,'size':160,'dx':40,'dy':-120}]); card('Back pain, maybe fever',T(46)+0.4,E(46))
 # ---- R37 (S47) abscess ----
 shot(T(47),'ANATOMY',id=37,program='layers',layers=[{'asset':'epidural','x':0.28,'y':0.44,'h':0.72}],
      marks=[{'type':'drift','layer':0,'x':0.9,'y':0.4,'x2':0.50,'y2':0.42,'t0':0.3,'t1':2.8,'n':7,'icon':'bacteria','size':80},
@@ -125,12 +125,12 @@ shot(T(47),'ANATOMY',id=37,program='layers',layers=[{'asset':'epidural','x':0.28
             {'type':'label','x':0.56,'y':0.50,'text':'a pocket of pus','t0':3.4,'size':44,'weight':700},{'type':'label','x':0.56,'y':0.56,'text':'in the space around the nerves','t0':3.6,'size':32,'weight':500,'color':'#CFC6B2'}])
 card('Infection gathers beside nerves',T(47)+0.5,E(47))
 # ---- R38 (S48–49) disguised ----
-shot(T(48),'ICONS',id=38,layout='split',items=[{'icon':'toast','label':'What it looks like','t0':0.2},{'icon':'flame','label':'What it is','t0':T(49)-T(48)+0.2}]); card('Disguised as burnt toast',T(48)+0.4,E(49))
+shot(T(48),'ICONS',id=38,layout='split',items=[{'icon':'toast','label':'What it looks like','t0':0.2},{'icon':'flame','label':'What it is','t0':T(49)-T(48)-0.4}]); card('Disguised as burnt toast',T(48)+0.4,E(49))
 # ---- R39–42 (S50–53) ----
-shot(T(50),'COUNT',id=39,n=8,cols=8,highlight=[3],highlightAt=1.4); card('All three at first: 1 in 8',T(50)+0.8,E(50)); cite(DAVIS,T(50)+0.8,E(52))
+shot(T(50),'COUNT',id=39,n=8,cols=8,size=150,highlight=[3],highlightAt=1.4); card('All three at first: 1 in 8',T(50)+0.8,E(50)); cite(DAVIS,T(50)+0.8,E(52))
 shot(T(51),'ICONS',id=40,size=170,items=[{'icon':'alarm','label':'Back pain','color':AMBER},{'icon':'thermometer','label':'Fever'},{'icon':'legs','label':'Nerve signs','color':RED}]); card('Back pain + fever + nerve signs',T(51)+0.4,E(51))
-shot(T(52),'COUNT',id=41,n=4,cols=4,highlight=[0,1,2],highlightAt=1.2,highlightColor=AMBER); card('3 in 4 diagnosed late',T(52)+0.6,E(52))
-shot(T(53),'COUNT',id=42,n=10,cols=10,highlight=[6],highlightAt=1.4,fadeGrey=2.6); card('About 1 in 10 died',T(53)+1.0,E(53)); cite(BUD,T(53)+1.0,E(53))
+shot(T(52),'COUNT',id=41,n=4,cols=4,size=170,highlight=[0,1,2],highlightAt=1.2,highlightColor=AMBER); card('3 in 4 diagnosed late',T(52)+0.6,E(52))
+shot(T(53),'COUNT',id=42,n=10,cols=10,size=140,highlight=[6],highlightAt=1.4,fadeGrey=2.6); card('About 1 in 10 died',T(53)+1.0,E(53)); cite(BUD,T(53)+1.0,E(53))
 # ---- R43–47 (S54–59) Fire 3 ----
 shot(T(54),'CHAPTER',id=43,kicker='Fire number three',title='Cancer in the spine',inset='tumor')
 shot(T(55),'ICONS',id=44,size=190,items=[{'icon':'document','label':'Cancer history'},{'icon':'sun','label':'Same day','t0':1.4}]); card('Past cancer + new pain: same day',T(55)+0.5,E(55)); cite(NICE,T(55)+0.5,E(55))
@@ -142,28 +142,28 @@ shot(T(58),'ANATOMY',id=47,program='layers',layers=[{'asset':'epidural','x':0.28
 card('Weak legs after cancer: emergency',T(58)+0.6,E(59)); cite(NICE,T(58),E(59))
 # ---- R48–50 (S60–62) Fire 4 ----
 shot(T(60),'CHAPTER',id=48,kicker='Fire number four',title='A broken bone',inset='vertebra')
-shot(T(61),'ICONS',id=49,size=190,items=[{'icon':'seventy','label':'Over 70','t0':0.3},{'icon':'pill','label':'Steroid medicines','t0':1.6},{'icon':'fall','label':'A real fall','t0':3.6}]); card('Over 70, steroids, a fall',T(61)+1.0,E(61)); cite(HAN,T(61)+1.0,E(61))
+shot(T(61),'ICONS',id=49,size=190,gap=440,items=[{'icon':'seventy','label':'Over 70','t0':0.3},{'icon':'pill','label':'Steroid medicines','t0':1.6},{'icon':'fall','label':'A real fall','t0':3.6}]); card('Over 70, steroids, a fall',T(61)+1.0,E(61)); cite(HAN,T(61)+1.0,E(61))
 shot(T(62),'ANATOMY',id=50,program='layers',credit=False,marks=[{'type':'icon','icon':'vertebra','x':0.32,'y':0.48,'size':300,'t0':0.1,'text':'strong bone'},{'type':'icon','icon':'vertebra','x':0.68,'y':0.48,'size':300,'t0':0.4,'color':RED,'text':'weak bone'},
             {'type':'crack','pts':[[0.665,0.36],[0.685,0.40],[0.670,0.44],[0.695,0.47],[0.680,0.50]],'t0':1.4,'grow':0.6,'w':8}])
 card('Weak bones crack more easily',T(62)+0.5,E(62))
 # ---- R51 (S63–64) the twist ----
-shot(T(63),'COUNT',id=51,n=1000,cols=50,mode='dots',stagger=0.0025,color=TEAL); card('Now the twist',T(63),E(63)); card('1,000 emergency patients',T(64)+0.4,E(64)); cite(SHAW,T(64)+0.4,E(65))
+shot(T(63),'COUNT',id=51,n=1000,cols=50,mode='dots',stagger=0.0025,color=TEAL); card('Now the twist',T(63),T(64)+0.3); card('1,000 emergency patients',T(64)+0.4,E(64)); cite(SHAW,T(64)+0.4,E(65))
 # ---- R52 (S65) ----
-shot(T(65),'ICONS',id=52,layout='split',size=220,items=[{'icon':'vertebra','label':'Inside the spine','t0':0.2},{'icon':'kidney','label':'Outside the spine','t0':1.2}]); card('Outside the spine: more common',T(65)+0.6,E(65))
+shot(T(65),'ICONS',id=52,layout='split',size=220,gap=600,items=[{'icon':'vertebra','label':'Inside the spine','t0':0.2},{'icon':'kidney','label':'Outside the spine','t0':1.2}]); card('Outside the spine: more common',T(65)+0.6,E(65))
 # ---- R53 (S66) alarm in back, fire elsewhere ----
 shot(T(66),'FIGURE',id=53,count=1,pose='backPain',face='worried',overlays=[{'region':'back','color':AMBER,'t0':0.2,'pulse':True},{'region':'belly','color':RED,'t0':2.0,'pulse':True}],
      icons=[{'icon':'alarm','at':'back','t0':0.4,'size':140,'dx':-60,'dy':-40},{'icon':'flame','at':'pelvis','t0':2.2,'size':150,'dx':150,'dy':-150}])
 card('Alarm in back, fire elsewhere',T(66)+0.5,E(66))
 # ---- R54 (S67) aorta ----
-shot(T(67),'ANATOMY',id=54,program='layers',layers=[{'asset':'spineFront','x':0.30,'y':0.5,'h':0.9},{'asset':'aorta','x':0.29,'y':0.55,'h':0.62,'t0':0.8}],
+shot(T(67),'ANATOMY',id=54,program='layers',layers=[{'asset':'spineFront','x':0.24,'y':0.5,'h':0.84},{'asset':'aorta','x':0.23,'y':0.547,'h':0.58,'t0':0.8}],
      marks=[{'type':'label','x':0.50,'y':0.40,'text':'The aorta','t0':1.4,'size':54},{'type':'label','x':0.50,'y':0.46,'text':'the main artery, in front of the spine','t0':1.6,'size':34,'weight':500,'color':'#CFC6B2'},{'type':'line','layer':1,'x':0.55,'y':0.40,'x2':2.1,'y2':0.36,'t0':1.4,'alpha':0.7}])
 card('The aorta: your main artery',T(67)+0.5,E(67))
 # ---- R55 (S68) aneurysm / dissection ----
 shot(T(68),'ANATOMY',id=55,program='layers',layers=[{'asset':'aneurysm','x':0.24,'y':0.46,'h':0.68},{'asset':'dissection','x':0.68,'y':0.44,'h':0.34,'t0':0.8,'feather':30}],
-     marks=[{'type':'label','x':0.24,'y':0.15,'text':'Burst: aneurysm','t0':0.5,'size':44,'align':'center'},{'type':'label','x':0.68,'y':0.17,'text':'Torn: dissection','t0':1.2,'size':44,'align':'center'},{'type':'ring','layer':0,'x':0.50,'y':0.55,'r':100,'t0':0.5,'color':RED}])
+     marks=[{'type':'label','x':0.40,'y':0.70,'text':'Burst: aneurysm','t0':0.5,'size':44,'align':'left'},{'type':'label','x':0.68,'y':0.17,'text':'Torn: dissection','t0':1.2,'size':44,'align':'center'},{'type':'ring','layer':0,'x':0.50,'y':0.55,'r':130,'t0':0.5,'color':RED}])
 card('Burst or torn: life-threatening',T(68)+0.4,E(68))
 # ---- R56–57 (S69) ----
-shot(T(69),'FIGURE',id=56,count=3,gap=480,pose='stand',faces=['calm','worried','calm'],outfits=['older','lead','woman'],overlays=[{'region':'belly','color':RED,'t0':1.4,'fig':1,'pulse':True}],icons=[{'icon':'question','fig':1,'dx':0,'dy':-330,'t0':1.8,'size':140}]); card('Burst aneurysm: 1 in 3 missed',T(69)+0.8,T(69)+4.0); cite(AZHAR,T(69)+0.8,E(69))
+shot(T(69),'FIGURE',id=56,count=3,gap=480,pose='stand',faces=['calm','worried','calm'],outfits=['older','lead','woman'],overlays=[{'region':'belly','color':RED,'t0':1.4,'fig':1,'pulse':True}],icons=[{'icon':'question','fig':1,'dx':190,'dy':-130,'t0':1.8,'size':130}]); card('Burst aneurysm: 1 in 3 missed',T(69)+0.8,T(69)+4.0); cite(AZHAR,T(69)+0.8,E(69))
 shot(T(69)+4.0,'ICONS',id=57,size=200,items=[{'icon':'person','label':'Missed at first','color':RED,'t0':0.1},{'icon':'scanner','label':'Then the scan','t0':0.9}]); card('First diagnosis: often something else',T(69)+4.4,E(69))
 # ---- R58–59 (S70–72) tone change ----
 shot(T(70),'ICONS',id=58,layout='single',size=300,items=[{'icon':'hand','t0':0.2}]); card('Calmly: the signs to check',T(70)+0.5,E(70))
@@ -175,7 +175,7 @@ shot(T(73)+4.0,'ICONS',id=61,layout='single',size=300,items=[{'icon':'bladder','
 shot(T(74),'FIGURE',id=62,count=1,pose='stand',face='worried',overlays=[{'region':'saddle','color':RED,'t0':0.4,'pulse':True}]); card('Numb saddle or genital area',T(74)+0.5,E(74))
 shot(T(75),'ICONS',id=63,size=220,items=[{'icon':'bowel','label':'Bowel control','color':RED,'t0':0.2},{'icon':'rings','label':'Sexual function','t0':T(76)-T(75)+0.2}]); card('Bowel control; sexual function change',T(75)+0.4,E(76))
 shot(T(77),'FIGURE',id=64,count=1,pose='stand',face='worried',overlays=[{'region':'legs','color':RED,'t0':0.4,'pulse':True}],icons=[{'icon':'arrowDown','at':'side','t0':1.0,'size':150,'dx':40,'dy':120}]); card('Weakening or numb legs',T(77)+0.4,E(77))
-shot(T(78),'FIGURE',id=65,count=1,pose='backPain',face='tired',overlays=[{'region':'back','color':RED,'t0':0.3,'pulse':True},{'region':'belly','color':RED,'t0':1.2,'pulse':True}],icons=[{'icon':'siren','at':'side','t0':2.6,'size':150,'dx':60,'dy':-140}])
+shot(T(78),'FIGURE',id=65,count=1,pose='backPain',face='ouch',overlays=[{'region':'back','color':RED,'t0':0.3,'pulse':True},{'region':'belly','color':RED,'t0':1.2,'pulse':True}],icons=[{'icon':'siren','at':'side','t0':2.6,'size':150,'dx':60,'dy':-40}])
 card('Sudden severe pain, feeling faint',T(78)+0.5,E(78)); cite(FERN,T(78)+0.5,E(78))
 shot(T(79),'ICONS',id=66,size=180,gap=420,items=[{'icon':'document','label':'Cancer history'},{'icon':'walk','label':'Weak legs','color':RED},{'icon':'siren','label':'Go now'}]); card('Past cancer + weak legs: go now',T(79)+0.5,E(79)); cite(NICE,T(79)+0.5,E(79))
 # ---- R67–69 (S80–82) SAME DAY ----
@@ -185,12 +185,12 @@ shot(T(82),'ICONS',id=69,size=190,items=[{'icon':'document','label':'Cancer hist
 # ---- R70 (S83) SOON ----
 shot(T(83),'BANNER',id=70,tier='SOON',sub='See a doctor',items=[{'icon':'fall','label':'After a fall'},{'icon':'seventy','label':'Over 70'},{'icon':'pill','label':'Long-term steroids'}]); card('SOON: fall, 70+, or steroids',T(83)+0.5,E(83)); cite(HAN,T(83)+0.5,E(83))
 # ---- R71–72 (S84–85) kidneys ----
-shot(T(84),'ANATOMY',id=71,program='layers',layers=[{'asset':'kidneyArt','x':0.30,'y':0.42,'h':0.66}],marks=[{'type':'icon','icon':'thermometer','x':0.78,'y':0.34,'size':200,'t0':0.8,'text':'fever'},{'type':'label','x':0.50,'y':0.56,'text':'Pain in your side','t0':1.6,'size':48},{'type':'label','x':0.50,'y':0.63,'text':'or pain when you pee','t0':2.4,'size':48}])
-card('Side pain + fever: kidneys?',T(84)+0.5,E(84)); cite(SHAW,T(84),E(85))
+shot(T(84),'ANATOMY',id=71,program='layers',layers=[{'asset':'kidneyArt','x':0.26,'y':0.36,'h':0.56}],marks=[{'type':'icon','icon':'thermometer','x':0.78,'y':0.34,'size':200,'t0':0.8,'text':'fever'},{'type':'label','x':0.50,'y':0.56,'text':'Pain in your side','t0':1.6,'size':48},{'type':'label','x':0.50,'y':0.63,'text':'or pain when you pee','t0':2.4,'size':48}])
+card('Side pain + fever: kidneys?',T(84)+0.5,E(84)); cite(SHAW,T(84),T(85)); cite(SHAW,T(85),E(85))
 shot(T(85),'ICONS',id=72,size=220,items=[{'icon':'kidney','label':'Kidneys?','t0':0.1},{'icon':'stamp','label':'Same-day check','t0':0.7}]); card('Kidneys? Same-day check',T(85)+0.3,E(85))
 # ---- R73–78 (S86–92) honest limits ----
 shot(T(86),'ICONS',id=73,size=220,gap=560,items=[{'icon':'flag','t0':0.1,'label':'A warning sign'},{'icon':'question','t0':T(87)-T(86)+0.2,'label':'proves nothing alone'}]); card('No single sign proves anything',T(87)+0.3,E(87)); cite(FIN,T(87)+0.3,E(87))
-shot(T(88),'COUNT',id=74,n=10,cols=10,highlight=[0,1,2,3,4,5,6,7],highlightAt=1.6,highlightColor=AMBER); card('8 in 10 have a "flag"',T(88)+1.0,E(88)); cite(HEN,T(88)+1.0,E(89))
+shot(T(88),'COUNT',id=74,n=10,cols=10,size=140,highlight=[0,1,2,3,4,5,6,7],highlightAt=1.6,highlightColor=AMBER); card('8 in 10 have a "flag"',T(88)+1.0,E(88)); cite(HEN,T(88)+1.0,E(89))
 shot(T(89),'COUNT',id=75,n=100,cols=20,highlight=[57],highlightAt=1.2,stagger=0.008); card('Under 1 in 100: serious',T(89)+0.6,E(89))
 shot(T(90),'ICONS',id=76,size=130,gap=200,halo=False,items=[{'icon':'flag','color':'#CFC6B2','t0':0.1+0.1*i} for i in range(5)]); card('Most signs: small studies',T(90)+0.5,E(90)); cite(FIN+'; '+HAN,T(90)+0.5,E(90))
 shot(T(91),'ICONS',id=77,size=160,gap=330,items=[{'icon':'bladder','label':'Bladder','color':RED},{'icon':'person','label':'Saddle','color':RED},{'icon':'legs','label':'Legs','color':RED},{'icon':'flame','label':'Sudden pain'},{'icon':'document','label':'Guidelines','t0':1.6}]); card('Go-now signs: named in guidelines',T(91)+0.5,E(91)); cite(GIRFT+'; '+NICE,T(91)+0.5,E(91))
@@ -207,7 +207,7 @@ shot(T(96),'CHAR',id=82,env='clinic',outfit='doctor',seq=[[0,'stand'],[0.6,'poin
 shot(T(97),'CHAR',id=83,env='home',outfit='lead',seq=[[0,'locked'],[0.9,'stand',1.2]],face=[[0,'ouch'],[1.0,'relief'],[2.2,'happy']],opts={'standX':1920*0.42,'floor':1080*0.84}); card('Back to that sock: burnt toast',T(98),E(98))
 # ---- R84–85 (S99–100) recap ----
 shot(T(99),'BANNER',id=84,tier='GO NOW',items=[{'icon':'bladder','label':'Bladder or bowel','color':RED},{'icon':'person','label':'Numb saddle','color':RED},{'icon':'legs','label':'Weak legs','color':RED},{'icon':'flame','label':'Sudden severe pain'}]); card('GO NOW: these signs',T(99)+0.5,E(99))
-shot(T(100),'BANNER',id=85,tier='SAME DAY',items=[{'icon':'thermometer','label':'Fever'},{'icon':'document','label':'New pain after cancer'}]); card('SAME DAY: fever; new pain after cancer',T(100)+0.4,E(100))
+shot(T(100),'BANNER',id=85,cut=True,tier='SAME DAY',items=[{'icon':'thermometer','label':'Fever'},{'icon':'document','label':'New pain after cancer'}]); card('SAME DAY: fever; new pain after cancer',T(100)+0.4,E(100))
 # ---- R86 (S101–102) look after your back, then the end card ----
 shot(T(101),'CHAR',id='85b',env='home',outfit='lead',seq=[[0,'stand'],[0.8,'wave',0.5],[3.2,'stand',0.5]],face=[[0,'calm'],[0.6,'happy']],opts={'standX':1920*0.42,'floor':1080*0.84}); card('Look after your back',T(102),E(102)+0.6)
 shot(E(102)+0.4,'END',id=86,lines=['Reviewed by Dr Greeff, Neurosurgery registrar','General education, not medical advice for you'],meterValue=0.45,cta='Subscribe for the next one')
@@ -225,8 +225,8 @@ for s in shots:
     else: cites.append([SERV,s['t0'],s['t1']])
 # worry meter track (corner overlay, bottom-right, 300 px); never during BANNER shots
 meter=[{'t0':T(10),'t1':T(11)+0.5,'from':0.45,'to':0.92,'hold':3},{'t0':T(24),'t1':T(25)+0.5,'from':0.92,'to':0.32,'hold':3},
-       {'t0':T(29),'t1':T(30),'from':0.32,'to':0.95,'hold':2},{'t0':T(70),'t1':T(71),'from':0.95,'to':0.5,'hold':2},
-       {'t0':T(97)+1.0,'t1':T(98),'from':0.5,'to':0.32,'hold':1.5}]
+       {'t0':T(29),'t1':T(30),'from':0.32,'to':0.95,'hold':1.0},{'t0':T(70),'t1':T(71),'from':0.95,'to':0.5,'hold':2},
+       {'t0':T(97)+1.0,'t1':T(98),'from':0.5,'to':0.32,'hold':round(T(99)-T(98)-0.4,2)}]
 lib=subprocess.run(['git','-C','/home/claude/should-i-worry-pipeline','rev-parse','--short','HEAD'],capture_output=True,text=True).stdout.strip()
 ep={'title':'E01 — The Back Pain That Can Kill You','tag':'Should I Worry? · doctor-reviewed, AI-produced','library':lib,'duration':DUR,'voOffset':OFF,
     'assets':{'spine':'assets/A_Espace_epidural.png','body':'assets/A_Colonne_normale2.png','vert':'assets/A_vertebre_06.png','mask_disc':'assets/mask_disc.png',

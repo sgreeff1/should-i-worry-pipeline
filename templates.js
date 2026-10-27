@@ -44,7 +44,7 @@ const TEMPLATES = {
   // 3. COUNT — n figures or dots, k highlighted; optional zoom into the first highlighted one
   COUNT:(ctx,t,spec,S)=>{
     const n=spec.n, cols=spec.cols||Math.ceil(Math.sqrt(n*1.9)), rows=Math.ceil(n/cols), dots=spec.mode==='dots';
-    const cw=dots? Math.min(28,(W*0.8)/cols) : Math.min(78,(W*0.86)/cols), ch=dots?cw:cw*1.25; const ox=W/2-(cols-1)*cw/2, oy=H*0.46-(rows-1)*ch/2;
+    const cw=dots? Math.min(28,(W*0.8)/cols) : Math.min(spec.size||78,(W*0.86)/cols), ch=dots?cw:cw*1.25; /* size: bigger sprites for small counts */ const ox=W/2-(cols-1)*cw/2, oy=H*0.46-(rows-1)*ch/2;
     const hi=new Set(spec.highlight||[]); const first=[...hi][0]??0; const fx=ox+(first%cols)*cw, fy=oy+Math.floor(first/cols)*ch;
     let cam=pushCam(t,S.dur); if(spec.zoomTo){ const k=EASE.io(clamp((t-spec.zoomTo.t0)/spec.zoomTo.dur)); cam={z:lerp(1,spec.zoomTo.z||3.2,k),wx:lerp(W/2,fx,k),wy:lerp(H/2,fy,k),sx:W/2,sy:H/2,drift:0}; } S.cam=cam;
     drawVoid(ctx,t,null,cam,{floor:false});

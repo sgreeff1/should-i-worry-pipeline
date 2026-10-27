@@ -1,7 +1,7 @@
 {
  "title": "E01 \u2014 The Back Pain That Can Kill You",
  "tag": "Should I Worry? \u00b7 doctor-reviewed, AI-produced",
- "library": "7bb60bc",
+ "library": "03bfa4e",
  "duration": 432.9,
  "voOffset": 2.4,
  "assets": {
@@ -144,10 +144,10 @@
     {
      "icon": "earMute",
      "fig": 2,
-     "dx": 0,
-     "dy": -260,
+     "dx": 165,
+     "dy": -40,
      "t0": 3.3599999999999994,
-     "size": 130
+     "size": 110
     }
    ],
    "kind": "FIGURE",
@@ -301,8 +301,7 @@
      "asset": "nervous",
      "x": 0.3,
      "y": 0.5,
-     "h": 0.92,
-     "feather": 40
+     "h": 0.84
     }
    ],
    "marks": [
@@ -372,9 +371,9 @@
    "layers": [
     {
      "asset": "spineFront",
-     "x": 0.3,
+     "x": 0.24,
      "y": 0.5,
-     "h": 0.9
+     "h": 0.84
     }
    ],
    "marks": [
@@ -427,9 +426,9 @@
    "layers": [
     {
      "asset": "spineFront",
-     "x": 0.3,
+     "x": 0.24,
      "y": 0.5,
-     "h": 0.9
+     "h": 0.84
     }
    ],
    "marks": [
@@ -510,7 +509,7 @@
     {
      "type": "label",
      "x": 0.48,
-     "y": 0.66,
+     "y": 0.58,
      "text": "Cauda equina",
      "t0": 1.4,
      "size": 54
@@ -518,7 +517,7 @@
     {
      "type": "label",
      "x": 0.48,
-     "y": 0.72,
+     "y": 0.64,
      "text": "a loose bundle of nerves",
      "t0": 1.6,
      "size": 34,
@@ -628,7 +627,7 @@
      "t0": 0.5,
      "size": 150,
      "dx": 40,
-     "dy": -120
+     "dy": -40
     }
    ],
    "kind": "FIGURE",
@@ -699,7 +698,7 @@
    "id": "24b",
    "count": 1,
    "pose": "backPain",
-   "face": "tired",
+   "face": "worried",
    "outfit": "lead",
    "overlays": [
     {
@@ -822,7 +821,7 @@
      "size": 210,
      "t0": 0.3,
      "color": "#EB5757",
-     "text": "the bundle"
+     "text": "nerve bundle"
     },
     {
      "type": "label",
@@ -1034,7 +1033,7 @@
    "id": 36,
    "count": 1,
    "pose": "backPain",
-   "face": "tired",
+   "face": "worried",
    "overlays": [
     {
      "region": "back",
@@ -1129,7 +1128,7 @@
     {
      "icon": "flame",
      "label": "What it is",
-     "t0": 4.369999999999988
+     "t0": 3.7699999999999876
     }
    ],
    "kind": "ICONS",
@@ -1140,6 +1139,7 @@
    "id": 39,
    "n": 8,
    "cols": 8,
+   "size": 150,
    "highlight": [
     3
    ],
@@ -1175,6 +1175,7 @@
    "id": 41,
    "n": 4,
    "cols": 4,
+   "size": 170,
    "highlight": [
     0,
     1,
@@ -1190,6 +1191,7 @@
    "id": 42,
    "n": 10,
    "cols": 10,
+   "size": 140,
    "highlight": [
     6
    ],
@@ -1324,6 +1326,7 @@
   {
    "id": 49,
    "size": 190,
+   "gap": 440,
    "items": [
     {
      "icon": "seventy",
@@ -1417,6 +1420,7 @@
    "id": 52,
    "layout": "split",
    "size": 220,
+   "gap": 600,
    "items": [
     {
      "icon": "vertebra",
@@ -1480,15 +1484,15 @@
    "layers": [
     {
      "asset": "spineFront",
-     "x": 0.3,
+     "x": 0.24,
      "y": 0.5,
-     "h": 0.9
+     "h": 0.84
     },
     {
      "asset": "aorta",
-     "x": 0.29,
-     "y": 0.55,
-     "h": 0.62,
+     "x": 0.23,
+     "y": 0.547,
+     "h": 0.58,
      "t0": 0.8
     }
    ],
@@ -1549,12 +1553,12 @@
    "marks": [
     {
      "type": "label",
-     "x": 0.24,
-     "y": 0.15,
+     "x": 0.4,
+     "y": 0.7,
      "text": "Burst: aneurysm",
      "t0": 0.5,
      "size": 44,
-     "align": "center"
+     "align": "left"
     },
     {
      "type": "label",
@@ -1570,7 +1574,7 @@
      "layer": 0,
      "x": 0.5,
      "y": 0.55,
-     "r": 100,
+     "r": 130,
      "t0": 0.5,
      "color": "#EB5757"
     }
@@ -1608,10 +1612,10 @@
     {
      "icon": "question",
      "fig": 1,
-     "dx": 0,
-     "dy": -330,
+     "dx": 190,
+     "dy": -130,
      "t0": 1.8,
-     "size": 140
+     "size": 130
     }
    ],
    "kind": "FIGURE",
@@ -1785,7 +1789,7 @@
    "id": 65,
    "count": 1,
    "pose": "backPain",
-   "face": "tired",
+   "face": "ouch",
    "overlays": [
     {
      "region": "back",
@@ -1807,7 +1811,7 @@
      "t0": 2.6,
      "size": 150,
      "dx": 60,
-     "dy": -140
+     "dy": -40
     }
    ],
    "kind": "FIGURE",
@@ -1924,9 +1928,9 @@
    "layers": [
     {
      "asset": "kidneyArt",
-     "x": 0.3,
-     "y": 0.42,
-     "h": 0.66
+     "x": 0.26,
+     "y": 0.36,
+     "h": 0.56
     }
    ],
    "marks": [
@@ -2004,6 +2008,7 @@
    "id": 74,
    "n": 10,
    "cols": 10,
+   "size": 140,
    "highlight": [
     0,
     1,
@@ -2312,6 +2317,7 @@
   },
   {
    "id": 85,
+   "cut": true,
    "tier": "SAME DAY",
    "items": [
     {
@@ -2607,7 +2613,7 @@
   [
    "Now the twist",
    257.22,
-   258.23
+   259.07
   ],
   [
    "1,000 emergency patients",
@@ -2924,6 +2930,11 @@
   [
    "Shaw et al., Eur Spine J, 2020 \u00b7 Anatomy: Servier Medical Art, CC BY 4.0",
    357.47,
+   362.47
+  ],
+  [
+   "Shaw et al., Eur Spine J, 2020",
+   362.47,
    364.08
   ],
   [
@@ -3022,7 +3033,7 @@
    "t1": 115.23,
    "from": 0.32,
    "to": 0.95,
-   "hold": 2
+   "hold": 1.0
   },
   {
    "t0": 290.95,
@@ -3036,7 +3047,7 @@
    "t1": 407.4,
    "from": 0.5,
    "to": 0.32,
-   "hold": 1.5
+   "hold": 2.06
   }
  ]
 }

@@ -1,6 +1,6 @@
 // episode.js — the composer: a JSON shot list → frames. Overlays (cards, citations, disclaimer), crossfades, grade.
 let EP=null; const ANIMS={};
-function cardBand(t){ const sh=EP&&EP.shots.find(s=>t>=s.t0&&t<s.t1); return (sh&&(sh.kind==='CHAR'||sh.kind==='FIGURE')&&!sh.cardLow)? H*0.08 : H*0.80; }   // safe band: never across a standing figure (Decision #49)
+function cardBand(t){ const sh=EP&&EP.shots.find(s=>t>=s.t0&&t<s.t1); return (sh&&(sh.kind==='CHAR'||sh.kind==='FIGURE')&&!sh.cardLow)? H*0.11 : H*0.80; }   // safe band: never across a standing figure (Decision #49)
 function card(ctx,text,t0,t,until){ const a=clamp((t-t0)/0.35), out=until!=null?clamp((until-t)/0.3):1, al=Math.min(a,out); if(al<=0) return;
   const y0=cardBand(t), sz=64; ctx.font=STYLE_FONT.card; const w=ctx.measureText(text).width; const yy=y0+(1-EASE.ob(a))*40;
   ctx.globalAlpha=al; rr(ctx,W/2-w/2-38,yy-sz*0.95,w+76,sz*1.45,26); ctx.fillStyle='rgba(18,26,46,0.78)'; ctx.fill(); ctx.fillStyle=P.white; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillText(text,W/2,yy+sz*0.12); ctx.globalAlpha=1; }
